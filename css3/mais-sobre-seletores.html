@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mais sobre seletores (prática)</title>
+
+    <style>
+        
+        h1{
+            color: green;
+        }
+
+        h1+p{
+            border-top: 3px solid grey;
+            padding-top: 10px;;
+        }
+
+        p.destaque{
+            color: purple;
+        }
+
+        p>a{
+            background-color: purple;
+            color: white;
+        }
+
+
+    </style>
+
+</head>
+<body>
+
+    <h1>Título da página</h1>
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing 
+        elit. Recusandae animi corrupti quasi expedita 
+        dignissimos quaerat assumenda saepe. Fuga, tempora? 
+        Molestias est cumque maxime nobis quae ipsam dignissimos, 
+        repellat iure ut! <br>
+        <a href="">Leia mais</a> - 
+        <a href="">Gostei(10)</a>
+    </p>
+
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing 
+        elit. Recusandae animi corrupti quasi expedita
+    </p>
+
+    <h2>Subtítulo da página</h2>
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing 
+        elit. Recusandae animi corrupti quasi expedita 
+        dignissimos quaerat assumenda saepe. Fuga, tempora? 
+        Molestias est cumque maxime nobis quae ipsam dignissimos, 
+        repellat iure ut!
+    </p>
+
+    <p class="destaque">
+        Lorem ipsum dolor sit amet consectetur adipisicing 
+        elit. Recusandae animi corrupti quasi expedita 
+        dignissimos quaerat assumenda saepe. Fuga, tempora? 
+        Molestias est cumque maxime nobis quae ipsam dignissimos, 
+        repellat iure ut!
+    </p>
+
+    
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navegação horizontal</title>
+    <style>
+
+        #menu ul {
+            list-style-type: none;
+            padding: 0;
+            width: 720px;
+            background-color: #24252a;
+            padding: 0.5em;
+        }
+
+        #menu ul::after {
+            content: " ";
+            clear: both;
+            display: table;
+        }
+
+        #menu li a {
+            display: block;
+            padding: 0.5em 1.5em;
+            color: white;
+            text-decoration: none;
+            float: left;
+            margin: 0 0.5em;
+        }
+
+        #menu li a:hover {
+            background-color: #0582ac;
+            border-radius: 1.2em;
+        }
+
+        #menu li a:active {
+            background-color: #7a7a7a;
+        }
+
+        #home #menu li.home a,
+        #produtos #menu li.produtos a,
+        #carrinho #menu li.carrinho a {
+            padding-left: 2.5em;
+            color: white;
+            background: purple url("img/seta.png") no-repeat 1.5em center;
+            border-radius: 1.2em;
+        }
+
+    </style>
+</head>
+<body id="home">
+
+    <h1>Menu navegação</h1>
+
+    <div id="menu">
+        <ul>
+            <li class="home"><a href="#">Home</a></li>
+            <li class="produtos"><a href="#">Produtos</a></li>
+            <li class="carrinho"><a href="#">Carrinho</a></li>
+            <li><a href="#">Contato</a></li>
+        </ul>
+    </div>
+
+    <div>
+        <h2>Conteúdo</h2>
+        <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
+            Quam sit distinctio voluptates ducimus accusamus, 
+            cupiditate et excepturi, commodi aspernatur iusto 
+            dolores. Adipisci, illo ea. Cumque laboriosam nihil 
+            recusandae voluptatibus beatae.
+        </p>
+    </div>
+
+    
+</body>
+</html>

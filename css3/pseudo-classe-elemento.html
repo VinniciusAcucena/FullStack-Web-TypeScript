@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pseudo-classe e pseudo-elemento</title>
+
+    <style>
+
+        input:checked {
+            margin-left: 20px;
+        }
+
+        input:focus {
+            background-color: purple;
+            color: white;
+        }
+
+        input:required {
+            border: 2px solid red;
+        }
+
+        p::first-line {
+             color: red;
+        }
+
+        p::first-letter {
+             font-size: 3em;
+             color: purple;
+        }
+
+        p::selection {
+             background-color: yellow;
+        }
+
+        h2::before{
+             content: "{";
+             color: violet;
+        }
+
+        h2::after{
+             content: "}";
+             color: violet;
+        }
+
+        a {
+            color: blueviolet;
+            text-decoration: none;
+            padding: 0.5em 1em;
+        }
+        a:hover {
+            background-color: blueviolet;
+            color: white;
+        }
+        a:active{
+            color: lightblue;
+        }
+
+
+    </style>
+
+</head>
+<body>
+
+    <a href="https://www.google.com/">Home</a> | 
+    <a href="https://www.google.com/">Sobre</a> | 
+    <a href="https://www.google.com/">Empresa</a> | 
+    <a href="https://www.google.com/">Produtos</a> | 
+    <a href="https://www.google.com/">Contato</a>
+
+    <div>
+        Conteúdo da DIV
+    </div>
+
+    <h2>Conteúdo do h2</h2>
+
+    <p>
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
+        Quam sit distinctio voluptates ducimus accusamus, 
+        cupiditate et excepturi, commodi aspernatur iusto 
+        dolores. Adipisci, illo ea. Cumque laboriosam nihil 
+        recusandae voluptatibus beatae.
+    </p>
+
+    <a href="https://www.google.com/">Google</a> | 
+    <a href="https://www.asdfasdfs.com/">Não acessado</a> | 
+    <a href="https://www.instagram.com/">Instagram</a>
+    
+
+    <h2>Formulário</h2>
+    <input type="checkbox"> aceito <br>
+    <input type="radio" name="opcao"> Sim <br>
+    <input type="radio" name="opcao"> não <br>
+    <input type="text" required placeholder="Digite seu nome">
+    <input type="text" placeholder="Digite seu telefone">
+    
+    
+</body>
+</html>

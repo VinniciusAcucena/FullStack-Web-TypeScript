@@ -1,0 +1,31 @@
+#menu ul {
+    list-style-type: none;
+    padding: 0;
+    width: 200px;
+}
+
+#menu li a {
+    display: block;
+    padding: 0.5em 1.5em;
+    color: black;
+    text-decoration: none;
+    background: #f7b600 url("../img/seta.png") no-repeat 0.5em center;
+}
+
+#menu li a:hover {
+    padding-left: 2.5em;
+    color: white;
+    background: #f99200 url("../img/seta.png") no-repeat 1.5em center;
+}
+
+#menu li a:active {
+    background-color: #885000;
+}
+
+#home #menu li.home a,
+#produtos #menu li.produtos a,
+#carrinho #menu li.carrinho a {
+    padding-left: 2.5em;
+    color: white;
+    background: purple url("../img/seta.png") no-repeat 1.5em center;
+}

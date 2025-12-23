@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clear</title>
+    <style>
+
+        #principal {
+            width: 920px;
+            margin: 0 auto;
+            border: 1px solid red;
+            background-color: orange;
+        }
+
+        #principal::after {
+            content: " ";
+            clear: both;
+            display: table;
+            border: 1px solid red;
+
+        }
+
+        #rodape {
+            width: 920px;
+            margin: 0 auto;
+            background-color: gray;
+            color: black;
+        }
+
+        .noticia {
+            background-color: #e5e5e5;
+            padding: 5px;
+            width: 280px;
+            margin: 7px;
+            float: left;
+        }
+
+        .item-galeria {
+            border: 1px solid gray;
+            padding: 0.5em;
+            background-color: white;
+        }
+
+        .limpar {
+            clear: both;
+        }
+
+        span, h3 {
+            border: 1px solid red;
+        }
+
+        .mudar-exibicao {
+            display: block;
+        }
+
+        
+    </style>
+</head>
+<body>
+
+    <div id="principal">
+
+        <div class="noticia">
+            <h2>Lorem ipsum dolor sit amet 1</h2>
+            <p>
+                Lorem ipsum dolor sit amet consectetur, 
+                adipisicing elit.Quam sit distinctio 
+                voluptates ducimus accusamus
+            </p>
+        </div>
+
+        <div class="noticia">
+            <h2>Lorem ipsum dolor sit amet 1</h2>
+            <p>
+                Lorem ipsum dolor sit amet consectetur, 
+                adipisicing elit.Quam sit distinctio 
+                voluptates ducimus accusamus
+                Lorem ipsum dolor sit amet consectetur, 
+                adipisicing elit.Quam sit distinctio 
+                voluptates ducimus accusamus
+            </p>
+        </div>
+
+        <div class="noticia">
+            <h2>Lorem ipsum dolor sit amet 1</h2>
+            <p>
+                Lorem ipsum dolor sit amet consectetur, 
+                adipisicing elit.Quam sit distinctio 
+                voluptates ducimus accusamus
+            </p>
+        </div>
+        
+    </div>
+
+  
+    <div id="rodape">
+        <h3 class="mudar-exibicao">Todos os direitos reservados</h3>
+        <span class="mudar-exibicao">Conteúdo de teste</span>
+        <span class="mudar-exibicao">Conteúdo de teste 2</span>
+    </div>
+   
+</body>
+</html>

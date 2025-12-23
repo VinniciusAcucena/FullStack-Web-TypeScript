@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posicionamento</title>
+    <style>
+
+        body {
+            background-color: purple;
+        }
+
+        #container {
+            width: 700px;
+            background-color: white;
+            margin: 10px auto;
+            padding: 8px;
+            position: relative;
+            border: 2px solid greenyellow;
+        }
+
+        .borda {
+            border: 1px solid red;
+        }
+
+        .estatica {
+            position: static;
+        }
+
+        .relativa {
+            position: relative;
+        }
+
+        .absoluta {
+
+            width: 500px;
+            margin: 0;
+        }
+
+        .fixa {
+            position: fixed;
+            width: 200px;
+            height: 120px;
+            z-index: 10;
+        }
+
+
+    </style>
+</head>
+<body>
+    
+    <div id="container">
+
+        <div class="fixa" style="background-color: green;">
+            <h3>chat</h3>
+            <button>Enviar mensagem</button>
+        </div>
+
+        <h1 class="borda">Posição absoluta</h1>
+        <p class="borda absoluta" style="background-color:lightpink;">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
+            Quam sit distinctio voluptates ducimus accusamus, 
+            cupiditate et excepturi, commodi aspernatur iusto 
+            dolores. Adipisci, illo ea. Cumque laboriosam nihil 
+            recusandae voluptatibus beatae.
+        </p>
+
+        <hr>
+
+        <h1 class="borda">Posição relativa</h1>
+        <p class="borda relativa" style="background-color: lightgreen;">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
+            Quam sit distinctio voluptates ducimus accusamus, 
+            cupiditate et excepturi, commodi aspernatur iusto 
+            dolores. Adipisci, illo ea. Cumque laboriosam nihil 
+            recusandae voluptatibus beatae.
+        </p>
+
+        <p class="borda">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
+            Quam sit distinctio voluptates ducimus accusamus, 
+            cupiditate et excepturi, commodi aspernatur iusto 
+            dolores. Adipisci, illo ea. Cumque laboriosam nihil 
+            recusandae voluptatibus beatae.
+        </p>
+
+        <h1 class="borda estatica">Fluxo normal</h1>
+        <p class="borda estatica">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
+            Quam sit distinctio voluptates ducimus accusamus, 
+            cupiditate et excepturi, commodi aspernatur iusto 
+            dolores. Adipisci, illo ea. Cumque laboriosam nihil 
+            recusandae voluptatibus beatae.
+        </p>
+
+        <p class="borda estatica">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
+            Quam sit distinctio voluptates ducimus accusamus, 
+            cupiditate et excepturi, commodi aspernatur iusto 
+            dolores. Adipisci, illo ea. Cumque laboriosam nihil 
+            recusandae voluptatibus beatae.
+        </p>
+
+        <p class="borda estatica">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
+            Quam sit distinctio voluptates ducimus accusamus, 
+            cupiditate et excepturi, commodi aspernatur iusto 
+            dolores. Adipisci, illo ea. Cumque laboriosam nihil 
+            recusandae voluptatibus beatae.
+        </p>
+        
+
+    </div>
+    
+</body>
+</html>

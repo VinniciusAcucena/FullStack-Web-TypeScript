@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobreposição de elementos</title>
+    <style>
+        .caixa1 {
+            border: 1px solid blue;
+            background-color: lightblue;
+            width: 100px;
+            height: 100px;
+            position: fixed;
+            top: 90px;
+            left: 90px;
+            z-index: 1000;
+        }
+
+        .caixa2 {
+            border: 1px solid red;
+            background-color: lightcoral;
+            width: 100px;
+            height: 100px;
+            position: fixed;
+            top: 80px;
+            left: 80px;
+        }
+
+        .caixa3 {
+            border: 1px solid green;
+            background-color: lightgreen;
+            width: 100px;
+            height: 100px;
+            position: fixed;
+            top: 160px;
+            left: 160px;
+        }
+
+        .caixa {
+            background-color: purple;
+            position: relative;
+            width: 700px;
+        }
+
+        .destaque {
+            position: absolute;
+            bottom: 2.5em;
+            left: 2em;
+            background-color: orange;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 30px;
+        }
+
+        .promocao {
+            background-color: white;
+            border: 2px dotted purple;
+            color: purple;
+            position: absolute;
+            bottom: -1.8em;
+            padding: 1em;
+            left: 10%;
+            right: 10%;
+            text-align: center;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>Exercício</h1>
+    <div class="caixa">
+
+        <img src="img/banner.png" width="700" alt="">
+        
+        <div class="destaque">
+            Tempo limitado
+        </div>
+
+        <div class="promocao">
+            Quero a promoção
+        </div>
+
+    </div>
+    
+</body>
+</html>
