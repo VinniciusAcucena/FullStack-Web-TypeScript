@@ -6,3 +6,15 @@
     background-color: orange;
     color: green
 }
+
+div#itens {
+    background-color: aquamarine;
+}
+
+.laranja{
+    background-color: orange;
+}
+
+.texto {
+    color: white;
+}

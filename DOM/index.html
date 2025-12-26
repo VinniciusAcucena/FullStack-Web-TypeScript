@@ -24,6 +24,48 @@
     <input type="text" name="nome">
     <input type="text" name="nome">
 
+    <h1 class="vermelho">Selecionando formulario</h1>
+
+    <form name="cadastro">
+        <input type="text" name="nome">
+        <input type="text" name="email">
+        <select name="sexo">
+            <option value="">Selecione</option>
+            <option value="masculino">Masculino</option>
+            <option value="feminino">Feminino</option>
+        </select>
+    </form>
+
+    <button onclick="preencher()">Preencher</button>
+
+    <h1 class="vermelho">Navegando por elementos</h1>
+
+    <div>primeiro irmão</div>
+    <div id="itens">
+        <p>primeiro elemento</p>
+        <p>segundo elemento</p>
+        <p>terceiro elemento</p>
+        <p>quarto elemento</p>
+    </div>
+    <div>terceiro irmão</div>
+
+    <h1 class="vermelho">Selecionando atributos</h1>
+    <img id="imagem" src="img/celular.png" alt="" width="300">
+    <a id="link" href="https://www.google.com">Google</a>
+
+    <button onclick="mudar()">Alterar imagem</button>
+
+    <h1 class="vermelho">Atributos personalizados</h1>
+
+    <span id="itens" quantidade="2" data-status="pendente">
+        carrinho
+    </span>
+
+    <h1 class="vermelho">Selecionando classes</h1>
+
+    <span id="span" class="laranja texto">Teste</span>
+    <button onclick="executar()">Clique aqui</button>
+
     <script src="script.js"></script>
 </body>
 </html>
