@@ -85,3 +85,16 @@ function executar() {
     listaClasses.add('teste')
     listaClasses.remove('texto')
 }
+
+//adicionando e removendo elementos
+const objId = document.getElementById('conteudo')
+const li = document.createElement('li')
+
+function adicionar() {
+    li.textContent = `Item adicionado`
+    objId.appendChild(li)
+}
+
+function remover() {
+    objId.removeChild(li)
+}
