@@ -7,10 +7,12 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npx serve -p 3000 ./dist"
   },
   "dependencies": {
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "serve": "^14.2.5"
   },
   "devDependencies": {
     "typescript": "^5.9.3"
