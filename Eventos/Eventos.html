@@ -7,9 +7,44 @@
 </head>
 <body>
 
-    <button onclick="executar('Clicou no botão com o onclick')">Clique aqui com onclick</button>
-    <button id="evento">Clique aqui com evento no DOM</button>
-    <button event-listener>Clique aqui com EventListener</button>
+    <div>
+        <h1>3 tipos de evento</h1>
+        <button onclick="executar('Clicou no botão com o onclick')">Clique aqui com onclick</button>
+        <button id="evento">Clique aqui com evento no DOM</button>
+        <button event-listener>Clique aqui com EventListener</button>
+    </div>
+
+    <div>
+        <h1>eventos por teclado</h1>
+        <input type="text" id="entrada">
+    </div>
+
+    <div id="mouse" style="border:1px, solid, red; margin-top: 5px;">
+        <h1>Eventos por mouse</h1>
+        <p>local para clicar e movimentar com o mouse</p>
+    </div>
+
+    <div>
+        <h1>Eventos de foco</h1>
+        <input type="text" id="foco" placeholder="nome">
+        <input type="text" placeholder="senha">
+    </div>
+
+    <div>
+        <h1>Eventos de formulário</h1>
+
+        <form name="formulario">
+            <input type="text" name="nome" placeholder="nome">           
+            sexo:
+            <select name="sexo">
+                <option value="">Selecione</option>
+                <option value="">Masculino</option>
+                <option value="">Feminino</option>
+            </select>
+            <input type="submit" value="salvar">
+            <input type="reset" value="limpar">
+        </form>
+    </div>
 
     <script type="text/javascript" src="script.js"></script>
 </body>
