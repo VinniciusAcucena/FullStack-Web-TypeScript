@@ -9,4 +9,3 @@ function toUpperCaseStrings(arr) {
     return arr.map(value => value.toUpperCase());
 }
 console.log(toUpperCaseStrings(films));
-//# sourceMappingURL=type-array.js.map

@@ -7,4 +7,3 @@ function display(product, price) {
     console.log(product.toUpperCase(), price.toFixed(0));
 }
 display(product, price);
-//# sourceMappingURL=type-annotation.js.map
