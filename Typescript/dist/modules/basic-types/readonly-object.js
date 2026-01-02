@@ -1,6 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.showMovies = showMovies;
 let movies = {
     movie1: {
         title: 'A Origem',
@@ -23,7 +20,7 @@ let movies = {
         genre: 'Crime'
     }
 };
-function showMovies(movies) {
+export function showMovies(movies) {
     //movies.movie1.title = 'The origin'
     console.log(movies);
 }

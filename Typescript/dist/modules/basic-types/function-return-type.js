@@ -1,7 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.calculateTotal = calculateTotal;
-exports.getPrincipalAddress = getPrincipalAddress;
 const shoppingCart = {
     cartItems: [
         { id: 1, price: 100 },
@@ -17,12 +13,12 @@ const addresses = [
 const customer = {
     addresses: addresses
 };
-function calculateTotal(shoppingCart) {
+export function calculateTotal(shoppingCart) {
     const total = shoppingCart.cartItems.reduce((acc, item) => acc + item.price, 0);
     return total;
 }
 console.log(calculateTotal(shoppingCart).toFixed(2));
-function getPrincipalAddress(customer) {
+export function getPrincipalAddress(customer) {
     return customer.addresses.find(addresses => addresses.default);
 }
 const principalAddres = getPrincipalAddress(customer);

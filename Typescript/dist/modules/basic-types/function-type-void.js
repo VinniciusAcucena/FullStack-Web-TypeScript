@@ -1,6 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.calculateTotal = calculateTotal;
 const shoppingCart = {
     cartItems: [
         { id: 1, price: 100 },
@@ -8,7 +5,7 @@ const shoppingCart = {
         { id: 3, price: 200 }
     ]
 };
-function calculateTotal(shoppingCart) {
+export function calculateTotal(shoppingCart) {
     const total = shoppingCart.cartItems.reduce((acc, item) => acc + item.price, 0);
     console.log(`Total do valor ${total.toFixed(2)}`);
 }

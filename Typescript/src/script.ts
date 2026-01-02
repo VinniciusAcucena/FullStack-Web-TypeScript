@@ -1,3 +1,3 @@
-export function soma2(a: number,b: number) {
-    return {result: a + b}
-}
+import { bootstrap } from "./modules/basic-types/intersection-types.js";
+
+export { bootstrap }
