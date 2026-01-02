@@ -1,7 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.showPerson = showPerson;
-function showPerson(person) {
+export function showPerson(person) {
     console.log(person);
 }
 showPerson({
