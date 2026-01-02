@@ -1,3 +1,3 @@
-import { bootstrap } from "./modules/narrowing/type-guard.js";
+import { bootstrap } from "./modules/narrowing/in.js";
 
 export { bootstrap }
