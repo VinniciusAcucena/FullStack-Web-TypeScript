@@ -1,3 +1,3 @@
-import { bootstrap } from "./modules/interface/interface.js";
+import { bootstrap } from "./modules/interface/extends.js";
 
 export { bootstrap }
