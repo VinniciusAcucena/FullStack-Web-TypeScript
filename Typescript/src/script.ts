@@ -1,3 +1,3 @@
-import { bootstrap } from "./modules/narrowing/type-never.js";
+import { bootstrap } from "./modules/interface/interface.js";
 
 export { bootstrap }
