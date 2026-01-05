@@ -7,10 +7,12 @@ export function Acomodacao() {
     )
 }
 
-export function Cabecalho() {
+export function Cabecalho( props: any) {
     return (
         <div className="bg-blue-700">
             <h1>Logo</h1>
+            <p>{props.titulo}</p>
+            <p>{props.preco}</p>
             {Menu()}
         </div>
     )

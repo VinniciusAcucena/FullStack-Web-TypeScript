@@ -1,10 +1,11 @@
-import { Acomodacao, Cabecalho } from "@/components/interface"
+import { Cabecalho } from "@/components/interface";
 
 export default function Page() {
     return (
         <div>
             <Cabecalho titulo="Localização"></Cabecalho>
-            {Acomodacao()}
+            <h1>Compras</h1>
+
         </div>
     )
 }

@@ -3,7 +3,7 @@ import { Acomodacao, Cabecalho } from "@/components/interface"
 export default function Compra() {
     return (
         <div>
-            {Cabecalho()}
+            <Cabecalho titulo="Localização"></Cabecalho>
             {Acomodacao()}
             
 
