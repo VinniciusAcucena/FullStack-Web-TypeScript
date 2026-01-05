@@ -1,12 +1,10 @@
 import { Acomodacao, Cabecalho } from "@/components/interface"
 
-export default function Compra() {
+export default function Page() {
     return (
         <div>
             {Cabecalho()}
             {Acomodacao()}
-            
-
         </div>
     )
 }
