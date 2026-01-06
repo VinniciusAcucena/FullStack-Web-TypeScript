@@ -1,3 +1,3 @@
 export default function Page() {
-    return <h1>Página de blog</h1>
+    return <h1 className="bg-amber-700">Página de blog</h1>
 }
