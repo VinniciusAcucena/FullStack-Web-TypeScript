@@ -18,7 +18,7 @@ export default function Page() {
 
     return (
         <div>
-            <h1>States</h1>
+            <h1 className="texto">States</h1>
             <button 
             onClick={incrementar}
             className="bg-orange-300 p-2">

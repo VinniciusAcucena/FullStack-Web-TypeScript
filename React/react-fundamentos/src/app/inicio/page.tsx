@@ -10,7 +10,7 @@ export default function Page() {
             <h1>Página de Inicio</h1>
             <img 
                 src="/img/gatinho.jpg"
-                style={ {width: 100, height:100 } }  
+                style={ {width: 200, height:100 } }  
             />
             <p>
                 Lorem ipsum dolor sit amet consectetur 
