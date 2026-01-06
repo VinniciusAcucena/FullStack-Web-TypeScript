@@ -35,7 +35,7 @@ body {
   @apply rounded-md;
 }
 
-.botao{
+button {
   @apply bg-blue-500 p-4;
   @apply rounded-md hover:bg-blue-300;
 }
