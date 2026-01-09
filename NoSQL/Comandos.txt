@@ -64,4 +64,16 @@ db.usuarios.countDocuments() // conta a quantidade de dados
 
  db.produtos.find({$or: [{categoria:'eletronicos'},{preco: {$lte: 100}}] }) // retorna campos em que pelo menos uma das condições seja verdadeiras
 
- 
+// Edição de dados
+
+db.produtos.updateOne({_id:ObjectId('696150a9d953e0007d1e262a')}, {$set:{nome: 'nome editado'}}) // Altera apenas um campo
+
+db.produtos.updateMany({categoria: 'eletronicos'}, {$set:{preco: 2000}}) // Altera vários campos
+
+db.produtos.updateOne({nome: 'quadro'}, {$unset:{preco: ''}}) // altera o dado removendo um de seus campos
+
+db.produtos.updateOne( {nome: 'notebook'}, {$set:{data: new Date()}}) // altera o dado adicionando um novo campo
+
+db.produtos.updateOne( {nome: 'notebook'}, {$inc:{preco: 1}}) // incrementa ou diminui o valor de um campo
+
+db.produtos.updateOne( {nome: 'quadro'}, {$rename:{nome: 'descricao'}}) // renomeia um campo
