@@ -1,16 +1,51 @@
-show databases
+//Introdução
 
-use loja
+show databases // mostrar bancos
 
-db.dropDatabase()
+use loja // Criar/Usar banco
 
-db.createCollection("usuarios")
+db.dropDatabase() //Excluir um banco
 
-show collections
+db.createCollection("usuarios") // Criar uma collection em um banco
+
+show collections // Mostrar as collections
 
 db.createCollection("produtos")
 
 show collections
 
-db.produtos.drop()
+db.produtos.drop() // Excluir uma collection
 
+//Inserção de dados
+
+db.usuarios.insertOne({
+    nome: 'Vinnicius',
+    idade: 25
+}) // inserir um dado
+
+db.usuarios.insertMany([
+    {
+        nome: 'João',
+        idade: 40
+    },
+    {
+        nome: 'Maria',
+        idade: 30
+    }
+]) // inserir varios dados
+
+//Busca de dados
+
+db.usuarios.find() // buscar todos os dados
+
+db.usuarios.find({nome: 'Vinnicius'}) // buscar dado especifico
+
+db.usuarios.find({nome: 'Vinnicius'}, {nome: true}) // buscar dado e mostrar apenas o campo escolhido
+
+db.usuarios.find({}, {idade: true, _id: false}) // buscar dados não mostrando um campo especifico
+
+db.usuarios.findOne() // busca o primeiro dado da collection
+
+db.usuarios.countDocuments() // conta a quantidade de dados
+
+ db.usuarios.countDocuments({nome: 'Maria'}) // conta a quantidade de uma valor especifico
