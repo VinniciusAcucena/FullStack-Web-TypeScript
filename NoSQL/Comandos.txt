@@ -49,3 +49,19 @@ db.usuarios.findOne() // busca o primeiro dado da collection
 db.usuarios.countDocuments() // conta a quantidade de dados
 
  db.usuarios.countDocuments({nome: 'Maria'}) // conta a quantidade de uma valor especifico
+
+// Busca de dados - Operadores de comparação
+
+ db.produtos.find({preco: {$gt: 100}}) // retorna dados com preços maiores que 100
+
+ db.produtos.find({preco: {$lt: 100}}) // retorna dados com preços menores que 100
+
+ db.produtos.find({categoria: {$eq: 'eletronicos'}}) // retorna dados com categoria igual a eletronicos
+
+ // Busca de dados - Operadores lógicos
+
+ db.produtos.find({$and: [{categoria:'eletronicos'},{preco: {$gte: 100}}]}) // retorna campos em que a duas condições são verdadeiras
+
+ db.produtos.find({$or: [{categoria:'eletronicos'},{preco: {$lte: 100}}] }) // retorna campos em que pelo menos uma das condições seja verdadeiras
+
+ 
