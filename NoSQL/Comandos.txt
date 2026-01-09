@@ -1,0 +1,16 @@
+show databases
+
+use loja
+
+db.dropDatabase()
+
+db.createCollection("usuarios")
+
+show collections
+
+db.createCollection("produtos")
+
+show collections
+
+db.produtos.drop()
+
