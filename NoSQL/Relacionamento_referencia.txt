@@ -1,0 +1,49 @@
+use rede_social
+
+db.createCollection("postagensRef")
+
+
+db.postagensRef.insertOne({
+    id:100,
+    titulo:"Férias na praia", 
+    curtidas:10, 
+    idUsuario :1,
+    comentarios:[{
+        texto:"Gostei", 
+        idUsuario :2
+        },
+        {
+            texto:"legal",
+            idUsuario :3
+        }] })
+
+db.postagensRef.insertOne({
+    id:101,
+    titulo:"Passeio barco", 
+    curtidas:20, 
+    idUsuario :2,
+    comentarios:[{
+        texto:"show", 
+        idUsuario :1
+        },
+        {
+            texto:"top",
+            idUsuario :3
+        }] })
+
+db.postagensRef.insertOne({
+    id:102,
+    titulo:"Viagem grécia", 
+    curtidas:50, 
+    idUsuario :2,
+    comentarios:[{
+        texto:"bonito", 
+        idUsuario :1
+        },
+        {
+            texto:"que vista",
+            idUsuario :3
+        }] })
+
+
+db.postagensRef.aggregate([{$lookup:{from:'usuarios', foreignField:'id', localField:'idUsuario', as:'usuario'}}])
