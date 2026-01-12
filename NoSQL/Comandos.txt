@@ -97,3 +97,9 @@ db.produtos.update({nome: 'televisao'}, {$push:{poleadas:{$each:['70'], $positio
  db.produtos.find().skip(2).limit(2) // Junção dos dois comandos a cima
 
  db.produtos.find().sort({preco: -1}) // Retorna os itens de forma ordenada
+
+ // Remoção de dados
+
+ db.produtos.deleteOne({_id: ObjectId('696150a9d953e0007d1e2629')}) // Deleta um item 
+
+ db.produtos.deleteMany({categoria: 'eletronicos'}) // Deleta vários itens
