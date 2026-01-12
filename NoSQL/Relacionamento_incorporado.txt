@@ -73,3 +73,10 @@ db.postagens.insertOne({
                 id:3, 
                 nome:"Beatriz"
             }}] })
+
+
+db.postagens.aggregate([{$match:{"autor.nome": "Bruno"}}, {$project:{id:true, titulo:true, curtidas:true}}, {$sort:{id: 1}}])
+
+rede_social> db.postagens.aggregate([ {$group:{_id:"$autor.nome"}} ])
+
+rede_social> db.postagens.aggregate([ {$group:{_id:"$autor.nome", total:{$sum:"$curtidas"}}} ])
