@@ -1,0 +1,75 @@
+use rede_social
+
+db.createCollection("usuarios")
+db.createCollection("postagens")
+
+
+db.usuarios.insertOne({id:1, nome:"Amanda", email: "m@gmail"})
+db.usuarios.insertOne({id:2, nome:"Bruno", email: "c@gmail"})
+db.usuarios.insertOne({id:3, nome:"Beatriz", email: "b@gmail"})
+
+
+db.postagens.insertOne({
+    id:100,
+    titulo:"Férias na praia", 
+    curtidas:10, 
+    autor:{
+        id:1, 
+        nome: "Amanda"
+        },
+    comentarios:[{
+        texto:"Gostei", 
+        autor:{
+            id:2,
+            nome:"Bruno"
+        }},
+        {
+            texto:"legal",
+            autor:{
+                id:3,
+                 nome:"Beatriz"
+                }}] })
+
+
+db.postagens.insertOne({
+    id:102,
+    titulo:"Viagem grécia", 
+    curtidas:50, 
+    autor:{
+        id:2, 
+        nome: "Bruno"
+    },
+    comentarios:[{
+        texto:"bonito", 
+        autor:{
+            id:1,
+            nome:"Amanda"
+        }},
+        {
+            texto:"que vista",
+            autor:{
+                id:3, 
+                nome:"Beatriz"
+            }}] })
+
+
+db.postagens.insertOne({
+    id:101,
+    titulo:"Passeio barco", 
+    curtidas:20, 
+    autor:{
+        id:2, 
+        nome: "Bruno"
+    },
+    comentarios:[{
+        texto:"show", 
+        autor:{
+            id:1,
+            nome:"Amanda"
+        }},
+        {
+            texto:"top",
+            autor:{
+                id:3, 
+                nome:"Beatriz"
+            }}] })
