@@ -27,4 +27,12 @@ RUN echo ${MSG} > /tmp/arquivo_criado_no_build.txt
 
 ADD ./arquivo.txt /tmp/
 
-CMD ["/bin/sh", "-c", "echo Texto para quando container iniciar"]
+COPY ./arquivo_2.txt /tmp/
+
+COPY ./arquivo_2.txt ./arquivo.txt /tmp/copy_folder/
+
+ENTRYPOINT ["echo", "Parametro via ENTRYPOINT"]
+
+CMD ["Parametro via CMD"]
+
+# CMD ["/bin/sh", "-c", "echo Texto para quando container"]
