@@ -2,6 +2,7 @@ ARG ALPINE_VERSION
 
 FROM alpine:${ALPINE_VERSION}
 
+WORKDIR /
 
 RUN apk add --no-cache nodejs && \
     apk add --no-cache npm && \
@@ -23,16 +24,22 @@ ENV BACK_PRD=${BACK_PRD}
 
 ENV MSG "Variavel de ambiente o dockerfile"
 
-RUN echo ${MSG} > /tmp/arquivo_criado_no_build.txt
+WORKDIR /tmp/
 
-ADD ./arquivo.txt /tmp/
+RUN echo ${MSG} > ./arquivo_criado_no_build.txt
 
-COPY ./arquivo_2.txt /tmp/
+ADD ./arquivo.txt ./
 
-COPY ./arquivo_2.txt ./arquivo.txt /tmp/copy_folder/
+COPY ./arquivo_2.txt ./
+
+COPY ./arquivo_2.txt ./arquivo.txt ./copy_folder/
 
 ENTRYPOINT ["echo", "Parametro via ENTRYPOINT"]
 
 CMD ["Parametro via CMD"]
 
 # CMD ["/bin/sh", "-c", "echo Texto para quando container"]
+
+EXPOSE 3000
+
+EXPOSE 3030
