@@ -1,16 +1,25 @@
-FROM alpine:3.19.0
+ARG ALPINE_VERSION
+
+FROM alpine:${ALPINE_VERSION}
 
 
 RUN apk add --no-cache nodejs && \
     apk add --no-cache npm && \
     apk add --no-cache git
 
+RUN adduser -D Vinnicius
+
+USER Vinnicius
+
 LABEL desenvolvedor="Vinnicius"
 LABEL mensagem="Uso de LABEL"
 LABEL versao="1.0"
 
-ENV FRONT_PRD="https://app.com.br"
-ENV BACK_PRD="https://app.com.br:3002"
+ARG FRONT_PRD="https://app.com.br"
+ARG BACK_PRD="https://app.com.br:3002"
+
+ENV FRONT_PRD=${FRONT_PRD}
+ENV BACK_PRD=${BACK_PRD}
 
 ENV MSG "Variavel de ambiente o dockerfile"
 
