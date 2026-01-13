@@ -24,3 +24,7 @@ ENV BACK_PRD=${BACK_PRD}
 ENV MSG "Variavel de ambiente o dockerfile"
 
 RUN echo ${MSG} > /tmp/arquivo_criado_no_build.txt
+
+ADD ./arquivo.txt /tmp/
+
+CMD ["/bin/sh", "-c", "echo Texto para quando container iniciar"]

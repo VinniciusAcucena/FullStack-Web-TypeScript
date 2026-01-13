@@ -1,0 +1,1 @@
+Arquivo para usar o ADD do Dockerfile
