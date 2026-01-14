@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM ubuntu as build
 
 RUN apt update && apt install build-essential -y
 
@@ -10,4 +10,10 @@ COPY Main.c .
 
 RUN gcc ./Main.c -static -o Main
 
-CMD ["./Main"]
+FROM alpine as prd
+
+COPY --from=build /opt/app/Main /opt/app/Main
+
+FROM prd as run
+
+CMD ["/opt/app/Main"]
