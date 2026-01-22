@@ -1,6 +1,9 @@
-import styles from "./Header.module.css";
-console.log(styles);
+import styles from "./Header.module.scss";
 
 export default function Header() {
-  return <div className={`header ${styles.header}`}>Logo | Menu</div>;
+  return (
+    <div className={`header ${styles.header}`}>
+      Logo | <a href="#">Menu</a>
+    </div>
+  );
 }
