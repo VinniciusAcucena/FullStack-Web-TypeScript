@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import "@radix-ui/themes/styles.css";
 import { Theme } from "@radix-ui/themes";
+import Header from "./components/Header/Header";
 
 export default function RootLayout({
   children,
@@ -12,7 +13,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Theme appearance="dark">{children}</Theme>
+        <Theme appearance="dark">
+          <Header></Header>
+          {children}
+        </Theme>
       </body>
     </html>
   );
