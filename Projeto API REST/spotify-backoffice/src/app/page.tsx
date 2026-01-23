@@ -3,8 +3,7 @@ import Header from "./components/Header/Header";
 
 export default function Home() {
   return (
-    <div className="border border-blue-700">
-      <Header></Header>
+    <div>
       <h1>Spotify backoffice</h1>
     </div>
   );

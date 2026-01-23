@@ -14,7 +14,9 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Theme appearance="dark">
-          <Header></Header>
+          <div className="border border-blue-700">
+            <Header></Header>
+          </div>
           {children}
         </Theme>
       </body>
