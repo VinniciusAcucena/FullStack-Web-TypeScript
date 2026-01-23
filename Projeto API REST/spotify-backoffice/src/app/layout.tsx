@@ -13,12 +13,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Theme appearance="dark">
-          <div className="border border-blue-700">
-            <Header></Header>
-          </div>
-          {children}
-        </Theme>
+        <Theme appearance="dark">{children}</Theme>
       </body>
     </html>
   );
