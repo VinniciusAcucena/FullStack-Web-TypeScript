@@ -1,5 +1,3 @@
-"use client";
-
 import {
   Disclosure,
   DisclosureButton,
@@ -11,20 +9,13 @@ import {
 } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(" ");
-}
+import Nav from "./Nav";
 
 export default function Header() {
-  const pathname = usePathname();
-
   const navigation = [
-    { name: "Home", href: "/home", current: pathname === "/home" },
-    { name: "Bandas", href: "/bands", current: pathname === "/bands" },
-    { name: "Músicas", href: "/tracks", current: pathname === "/tracks" },
+    { name: "Home", href: "/home" },
+    { name: "Bandas", href: "/bands" },
+    { name: "Músicas", href: "/tracks" },
   ];
   return (
     <Disclosure
@@ -60,21 +51,7 @@ export default function Header() {
             </div>
             <div className="hidden sm:ml-6 sm:block">
               <div className="flex space-x-4">
-                {navigation.map((item) => (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    aria-current={item.current ? "page" : undefined}
-                    className={classNames(
-                      item.current
-                        ? "bg-gray-950/50 text-white"
-                        : "text-gray-300 hover:bg-white/5 hover:text-white",
-                      "rounded-md px-3 py-2 text-sm font-medium",
-                    )}
-                  >
-                    {item.name}
-                  </Link>
-                ))}
+                <Nav navigation={navigation} />
               </div>
             </div>
           </div>
@@ -138,22 +115,9 @@ export default function Header() {
 
       <DisclosurePanel className="sm:hidden">
         <div className="space-y-1 px-2 pt-2 pb-3">
-          {navigation.map((item) => (
-            <DisclosureButton key={item.name} as="div">
-              <Link
-                href={item.href}
-                aria-current={item.current ? "page" : undefined}
-                className={classNames(
-                  item.current
-                    ? "bg-gray-950/50 text-white"
-                    : "text-gray-300 hover:bg-white/5 hover:text-white",
-                  "block rounded-md px-3 py-2 text-base font-medium",
-                )}
-              >
-                {item.name}
-              </Link>
-            </DisclosureButton>
-          ))}
+          <DisclosureButton as="div">
+            <Nav navigation={navigation} type="hamburguer"></Nav>
+          </DisclosureButton>
         </div>
       </DisclosurePanel>
     </Disclosure>
