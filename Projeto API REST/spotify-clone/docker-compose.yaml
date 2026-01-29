@@ -1,3 +1,8 @@
+networks:
+  spotify-network:
+    name: spotify-network
+    driver: bridge
+
 services:
   spotify-clone:
     container_name: spotify-clone
@@ -6,6 +11,8 @@ services:
       dockerfile: Dockerfile
       target: dev
     image: spotify-clone:latest
+    networks:
+      - spotify-network
     ports:
       - "3000:3000"
     volumes:

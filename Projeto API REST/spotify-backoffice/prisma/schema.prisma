@@ -1,0 +1,14 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model bands {
+  id   String @id(map: "bands_pk") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name String @db.VarChar
+}
