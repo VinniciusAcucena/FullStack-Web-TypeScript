@@ -12,9 +12,10 @@ model Band {
   id   String @id @default(uuid()) @db.Uuid
   name String @unique
   slug String @unique
+  description String? 
   status Status @default(ACTIVE)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
   @@map("bands")
 }
@@ -23,10 +24,10 @@ model Track {
   id        String   @id @default(uuid()) @db.Uuid
   title     String   
   slug      String   @unique 
-  duration  Int
+  durationInSeconds  Int @map("duration_in_seconds")
   status    Status   @default(ACTIVE)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
   @@map("tracks")
 }
