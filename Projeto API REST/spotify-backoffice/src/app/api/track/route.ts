@@ -1,5 +1,8 @@
-export function GET(request: Request) {
-  return Response.json({ msg: "API método GET funcionando!" });
+import prisma from "../../../../lib/prisma";
+
+export async function GET(request: Request) {
+  const items = await prisma.track.findMany();
+  return Response.json(items);
 }
 
 export function POST(request: Request) {
