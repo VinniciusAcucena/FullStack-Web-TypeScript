@@ -9,26 +9,33 @@ datasource db {
 }
 
 model Band {
-  id   String @id @default(uuid()) @db.Uuid
-  name String @unique
-  slug String @unique
-  description String? 
-  status Status @default(ACTIVE)
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+  id          String   @id @default(uuid()) @db.Uuid
+  name        String   @unique
+  slug        String   @unique
+  description String?
+  status      Status   @default(ACTIVE)
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  tracks Track[] @relation("BandTracks")
 
   @@map("bands")
 }
 
 model Track {
-  id        String   @id @default(uuid()) @db.Uuid
-  title     String   
-  slug      String   @unique 
-  durationInSeconds  Int @map("duration_in_seconds")
-  status    Status   @default(ACTIVE)
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+  id                String   @id @default(uuid()) @db.Uuid
+  title             String
+  slug              String   @unique
+  durationInSeconds Int      @map("duration_in_seconds")
+  status            Status   @default(ACTIVE)
+  createdAt         DateTime @default(now()) @map("created_at")
+  updatedAt         DateTime @updatedAt @map("updated_at")
 
+  bandId String @map("band_id") @db.Uuid
+
+  band Band @relation("BandTracks", fields: [bandId], references: [id], onDelete: Cascade)
+
+  @@index([bandId])
   @@map("tracks")
 }
 
