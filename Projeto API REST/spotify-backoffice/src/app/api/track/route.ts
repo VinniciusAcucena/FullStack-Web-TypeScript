@@ -5,8 +5,18 @@ export async function GET(request: Request) {
   return Response.json(items);
 }
 
-export function POST(request: Request) {
-  return Response.json({ msg: "API método POST funcionando!" });
+export async function POST(request: Request) {
+  const bodyText = await request.text();
+  const params = new URLSearchParams(bodyText);
+  const title = params.get("title");
+  const slug = params.get("slug");
+  const durationInSeconds = params.get("durationInSeconds");
+  const status = params.get("status");
+  console.log(params);
+  return Response.json({
+    msg: "Dados recebidos",
+    data: { title, slug, durationInSeconds, status },
+  });
 }
 
 export function PUT(request: Request) {
