@@ -1,4 +1,14 @@
+import z from "zod";
 import prisma from "../../../../lib/prisma";
+
+const BandSchema = z.object({
+  name: z.string().min(1),
+  slug: z.string().min(1),
+  description: z.string().optional(),
+  status: z.enum(["ACTIVE", "INACTIVE"]).default("ACTIVE"),
+});
+
+const BandArraySchema = z.array(BandSchema).min(1);
 
 export async function GET(request: Request) {
   const items = await prisma.band.findMany();
@@ -6,11 +16,43 @@ export async function GET(request: Request) {
 }
 
 export async function POST(request: Request) {
-  const data = await request.json();
-  return Response.json({
-    msg: "Dados recebidos",
-    data,
-  });
+  try {
+    const data = await request.json();
+
+    if (Array.isArray(data)) {
+      const validateData = BandArraySchema.parse(data);
+      return Response.json({
+        msg: "JSON de várias bandas recebido",
+        validateData,
+      });
+    } else if (typeof data === "object" && data !== null) {
+      const validateData = BandSchema.parse(data);
+      return Response.json({
+        msg: "JSON de uma banda recebido",
+        validateData,
+      });
+    } else {
+      return Response.json(
+        { msg: "Formato de dados inválido" },
+        { status: 400 },
+      );
+    }
+  } catch (error: unknown) {
+    if (error instanceof SyntaxError) {
+      console.error("Erro de sintaxe no JSON:", error.message);
+      return Response.json({ msg: "Erro de sintaxe no JSON" }, { status: 400 });
+    }
+
+    if (error instanceof z.ZodError) {
+      return Response.json(
+        { msg: "Erro de validação", errors: error.issues },
+        { status: 400 },
+      );
+    }
+
+    console.error("Erro desconhecido:", error);
+    return Response.json({ msg: "Erro desconhecido" }, { status: 500 });
+  }
 }
 
 export function PUT(request: Request) {
