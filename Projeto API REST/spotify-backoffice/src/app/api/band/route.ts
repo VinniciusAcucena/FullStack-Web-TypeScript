@@ -6,16 +6,10 @@ export async function GET(request: Request) {
 }
 
 export async function POST(request: Request) {
-  const bodyText = await request.text();
-  const params = new URLSearchParams(bodyText);
-  const name = params.get("name");
-  const slug = params.get("slug");
-  const description = params.get("description");
-  const status = params.get("status");
-  console.log(params);
+  const data = await request.json();
   return Response.json({
     msg: "Dados recebidos",
-    data: { name, slug, description, status },
+    data,
   });
 }
 
