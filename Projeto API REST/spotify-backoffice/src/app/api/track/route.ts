@@ -1,12 +1,6 @@
 import z from "zod";
 import prisma from "../../../../lib/prisma";
-
-const TrackSchema = z.object({
-  name: z.string().min(1),
-  slug: z.string().min(1),
-  durationInSeconds: z.int().optional(),
-  status: z.enum(["ACTIVE", "INACTIVE"]).default("ACTIVE"),
-});
+import { TrackSchema } from "@/app/schemas/track.schema";
 
 const TrackArraySchema = z.array(TrackSchema).min(1);
 
@@ -19,13 +13,7 @@ export async function POST(request: Request) {
   try {
     const data = await request.json();
 
-    if (Array.isArray(data)) {
-      const validateData = TrackArraySchema.parse(data);
-      return Response.json({
-        msg: "JSON de várias músicas recebido",
-        validateData,
-      });
-    } else if (typeof data === "object" && data !== null) {
+    if (typeof data === "object" && data !== null) {
       const validateData = TrackSchema.parse(data);
       return Response.json({
         msg: "JSON de uma música recebido",
