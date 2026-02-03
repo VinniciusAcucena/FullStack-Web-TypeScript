@@ -2,6 +2,7 @@ import z from "zod";
 import prisma from "../../../../lib/prisma";
 import { BandSchema } from "@/app/schemas/band.schema";
 import { PrismaClientInitializationError } from "../../../../generated/prisma/runtime/library";
+import { CustomError } from "@/app/utils/CustomError";
 
 export async function GET(request: Request) {
   const items = await prisma.band.findMany();
@@ -11,8 +12,17 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   try {
     const data = await request.json();
+
     if (typeof data === "object" && data !== null) {
       const validateData = BandSchema.parse(data);
+
+      const bandExists = await prisma.band.findUnique({
+        where: { name: validateData.name },
+      });
+
+      if (bandExists) {
+        throw new CustomError("Banda já cadastrada", 409);
+      }
 
       const insertedItem = await prisma.band.create({
         data: validateData,
@@ -38,6 +48,13 @@ export async function POST(request: Request) {
       return Response.json(
         { msg: "Erro de validação", errors: error.issues },
         { status: 400 },
+      );
+    }
+
+    if (error instanceof CustomError) {
+      return Response.json(
+        { error: error.message },
+        { status: error.statusCode },
       );
     }
 
