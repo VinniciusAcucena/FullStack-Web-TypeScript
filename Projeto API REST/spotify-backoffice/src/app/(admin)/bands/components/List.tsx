@@ -1,17 +1,18 @@
 import Button from "@/app/components/Button";
+import { Band } from "../../../../../generated/prisma";
 
-interface Band {
-  name: string;
-  status: string;
-}
-
-const TableRow = ({ name, status }: Band) => {
+const TableRow = ({ band }: { band: Band }) => {
   return (
     <tr>
-      <td className="px-6 py-4 whitespace-nowrap text-gray-800">{name}</td>
+      <td className="px-6 py-4 whitespace-nowrap text-gray-800">{band.name}</td>
+      <td className="px-6 py-4 whitespace-nowrap text-gray-800">
+        {band.description && band.description.length > 50
+          ? `${band.description.slice(0, 50)}...`
+          : band.description}
+      </td>
       <td className="px-6 py-4 whitespace-nowrap text-gray-800">
         <span className="inline-flex items-center px-2 py-0.5 rounded bg-green-100 text-green-800">
-          {status}
+          {band.status}
         </span>
       </td>
       <td className="text-right font-medium space-x-4 whitespace-nowrap">
@@ -22,7 +23,9 @@ const TableRow = ({ name, status }: Band) => {
   );
 };
 
-export default function List() {
+export default async function List() {
+  const response = await fetch("http://localhost:3000/api/band");
+  const bands: Band[] = await response.json();
   return (
     <section className="overflow-x-auto p-4">
       Lista
@@ -35,13 +38,23 @@ export default function List() {
             <th scope="col" className="px-6 py-3">
               Nome
             </th>
+            <th scope="col" className="px-6 py-3">
+              Descrição
+            </th>
             <th scope="col">Status</th>
             <th></th>
           </tr>
         </thead>
         <tbody>
-          <TableRow name="Shakira" status="Ativo"></TableRow>
-          <TableRow name="Bon Jovi" status="Ativo"></TableRow>
+          {Array.isArray(bands) && bands.length > 0 ? (
+            bands.map((band) => <TableRow key={band.id} band={band} />)
+          ) : (
+            <tr>
+              <td colSpan={2} className="text-center text-gray-500 py-4">
+                Nenhuma banda encontrada
+              </td>
+            </tr>
+          )}
         </tbody>
       </table>
     </section>
