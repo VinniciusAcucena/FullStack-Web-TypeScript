@@ -1,5 +1,6 @@
 import { BandArraySchema } from "@/app/schemas/band.schema";
 import z from "zod";
+import prisma from "../../../../../lib/prisma";
 
 export async function POST(request: Request) {
   try {
@@ -7,9 +8,14 @@ export async function POST(request: Request) {
 
     if (Array.isArray(data)) {
       const validateData = BandArraySchema.parse(data);
+
+      const insertedItem = await prisma.band.createMany({
+        data: validateData,
+      });
+
       return Response.json({
         msg: "JSON de várias bandas recebido",
-        validateData,
+        insertedItem,
       });
     } else {
       return Response.json(

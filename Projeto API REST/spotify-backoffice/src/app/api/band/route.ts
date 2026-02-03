@@ -12,9 +12,14 @@ export async function POST(request: Request) {
     const data = await request.json();
     if (typeof data === "object" && data !== null) {
       const validateData = BandSchema.parse(data);
+
+      const insertedItem = await prisma.band.create({
+        data: validateData,
+      });
+
       return Response.json({
         msg: "JSON de uma banda recebido",
-        validateData,
+        insertedItem,
       });
     } else {
       return Response.json(
