@@ -1,6 +1,7 @@
 import z from "zod";
 import prisma from "../../../../lib/prisma";
 import { BandSchema } from "@/app/schemas/band.schema";
+import { PrismaClientInitializationError } from "../../../../generated/prisma/runtime/library";
 
 export async function GET(request: Request) {
   const items = await prisma.band.findMany();
@@ -37,6 +38,20 @@ export async function POST(request: Request) {
       return Response.json(
         { msg: "Erro de validação", errors: error.issues },
         { status: 400 },
+      );
+    }
+
+    if (error instanceof PrismaClientInitializationError) {
+      return Response.json(
+        { msg: "erro de inicialização do banco de dados" },
+        { status: 500 },
+      );
+    }
+
+    if (error instanceof Error) {
+      return Response.json(
+        { msg: "erro interno de servidor" },
+        { status: 500 },
       );
     }
 
