@@ -5,8 +5,22 @@ import { PrismaClientInitializationError } from "../../../../generated/prisma/ru
 import { CustomError } from "@/app/utils/CustomError";
 
 export async function GET(request: Request) {
-  const items = await prisma.band.findMany();
-  return Response.json(items);
+  const currentPage: number = 1;
+  const take: number = 4;
+  const skip: number = (currentPage - 1) * take;
+
+  const totalItems = await prisma.band.count();
+  const items = await prisma.band.findMany({
+    skip,
+    take,
+    orderBy: { createdAt: "asc" },
+  });
+
+  const totalPages = Math.ceil(totalItems / take);
+  return Response.json({
+    pagination: { currentPage, totalItems, totalPages },
+    bands: items,
+  });
 }
 
 export async function POST(request: Request) {
