@@ -6,9 +6,6 @@ interface Props {
 
 export default function layout({ children }: Props) {
   return (
-    <div className="w-full max-w-7xl mx-auto p-6 space-y-6">
-      <h1>Layout bands</h1>
-      {children}
-    </div>
+    <div className="w-full max-w-7xl mx-auto p-6 space-y-6">{children}</div>
   );
 }
