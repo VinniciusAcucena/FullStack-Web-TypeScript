@@ -3,7 +3,7 @@
 import Button from "@/app/components/Button";
 import { Band } from "../../../../../generated/prisma";
 import { useEffect, useState } from "react";
-import Loading from "../../components/Loading";
+import Loading from "../../../components/Loading";
 import Pagination from "./Pagination";
 
 interface BandList {
