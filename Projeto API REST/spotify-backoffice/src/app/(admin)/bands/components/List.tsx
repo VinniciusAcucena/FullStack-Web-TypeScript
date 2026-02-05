@@ -48,7 +48,7 @@ export default function List() {
         setData(null);
         setLoading(true);
         const response = await fetch(
-          `http://localhost:3001/api/band?page=${page}&take=8`,
+          `http://localhost:3001/api/band?page=${page}&take=10`,
         );
         const bandList: BandList = await response.json();
 

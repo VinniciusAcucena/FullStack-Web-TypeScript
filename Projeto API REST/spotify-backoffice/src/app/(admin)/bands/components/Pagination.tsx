@@ -11,6 +11,9 @@ export default function Pagination({
   currentPage,
   setCurrentPage,
 }: Props) {
+  const surroundingPages = 2;
+  const startPage = Math.max(currentPage - surroundingPages, 1);
+  const endPage = Math.min(currentPage + surroundingPages, totalPages);
   const handlePrev = () => {
     if (currentPage > 1) {
       setCurrentPage((prev) => prev - 1);
@@ -33,7 +36,10 @@ export default function Pagination({
       >
         Voltar
       </button>
-      {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNumber) => {
+      {Array.from(
+        { length: endPage - startPage + 1 },
+        (_, i) => i + startPage,
+      ).map((pageNumber) => {
         const isActive = pageNumber === currentPage;
         return (
           <button
