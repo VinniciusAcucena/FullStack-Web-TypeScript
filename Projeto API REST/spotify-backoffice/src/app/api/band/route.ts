@@ -3,10 +3,14 @@ import prisma from "../../../../lib/prisma";
 import { BandSchema } from "@/app/schemas/band.schema";
 import { PrismaClientInitializationError } from "../../../../generated/prisma/runtime/library";
 import { CustomError } from "@/app/utils/CustomError";
+import { NextRequest } from "next/server";
 
-export async function GET(request: Request) {
-  const currentPage: number = 1;
-  const take: number = 4;
+export async function GET(request: NextRequest) {
+  const url = new URL(request.url);
+  const { searchParams } = url;
+
+  const currentPage: number = parseInt(searchParams.get("page") || "1");
+  const take: number = parseInt(searchParams.get("take") || "10");
   const skip: number = (currentPage - 1) * take;
 
   const totalItems = await prisma.band.count();
