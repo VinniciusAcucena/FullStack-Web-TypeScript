@@ -1,11 +1,23 @@
 import Button from "@/app/components/Button";
+import { BandSchema } from "@/app/schemas/band.schema";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Dispatch, SetStateAction } from "react";
+import { useForm } from "react-hook-form";
+import z from "zod";
 
 interface Props {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
 }
 
+type BandFormData = z.infer<typeof BandSchema>;
+
 export default function Create({ setIsOpen }: Props) {
+  const { register, handleSubmit, formState } = useForm<BandFormData>({
+    resolver: zodResolver(BandSchema),
+    defaultValues: { status: "ACTIVE" },
+  });
+
+  const onSubmit = (data: BandFormData) => {};
   return (
     <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
       <div className="bg-white p-8 rounded shadow-lg w-full max-w-3xl relative">
@@ -19,26 +31,47 @@ export default function Create({ setIsOpen }: Props) {
         <h2 className="text-xl font-semibold text-gray-800 mb-4">
           Cadastrar banda
         </h2>
-        <form className="flex flex-col gap-2">
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
           <div>
             <span className="font-semibold text-sm">Nome:</span>
             <input
+              {...register("name")}
               type="text"
               placeholder="Nome da banda"
               className="w-full p-2 border rounded"
-              required
             />
+            {formState?.errors?.name && (
+              <p className="text-red-500 text-sm mt-1">
+                {formState.errors.name.message}
+              </p>
+            )}
           </div>
           <div>
             <span className="font-semibold text-sm">Slug:</span>
-            <input type="text" className="w-full p-2 border rounded" required />
+            <input
+              {...register("slug")}
+              type="text"
+              placeholder="nome-da-banda"
+              className="w-full p-2 border rounded"
+            />
+            {formState?.errors?.slug && (
+              <p className="text-red-500 text-sm mt-1">
+                {formState.errors.slug.message}
+              </p>
+            )}
           </div>
           <div>
             <span className="font-semibold text-sm">Descrição:</span>
             <textarea
+              {...register("description")}
               placeholder="Descrição da banda"
               className="w-full p-2 border rounded"
             />
+            {formState?.errors?.description && (
+              <p className="text-red-500 text-sm mt-1">
+                {formState.errors.description.message}
+              </p>
+            )}
           </div>
 
           <div className="flex justify-end">
