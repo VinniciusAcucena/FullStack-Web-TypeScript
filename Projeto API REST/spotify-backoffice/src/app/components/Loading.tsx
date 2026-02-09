@@ -1,10 +1,23 @@
 import Image from "next/image";
-
-export default function Loading() {
+interface Props {
+  width?: number;
+  height?: number;
+  showText?: boolean;
+}
+export default function Loading({
+  width = 40,
+  height = 40,
+  showText = true,
+}: Props) {
   return (
     <div className="flex flex-col items-center">
-      <Image src="/loading.svg" alt="Loading" width={50} height={50}></Image>
-      Carregando
+      <Image
+        src="/loading.svg"
+        alt="Loading"
+        width={width}
+        height={height}
+      ></Image>
+      {showText && "Carregando..."}
     </div>
   );
 }

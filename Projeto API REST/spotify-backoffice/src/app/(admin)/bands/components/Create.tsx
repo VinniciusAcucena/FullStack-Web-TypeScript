@@ -1,9 +1,10 @@
 import Button from "@/app/components/Button";
+import Loading from "@/app/components/Loading";
 import { BandSchema } from "@/app/schemas/band.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { useForm } from "react-hook-form";
-import z from "zod";
+import z, { set } from "zod";
 
 interface Props {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
@@ -12,6 +13,7 @@ interface Props {
 type BandFormData = z.infer<typeof BandSchema>;
 
 export default function Create({ setIsOpen }: Props) {
+  const [isLoading, setIsLoading] = useState(false);
   const { register, handleSubmit, formState } = useForm<BandFormData>({
     resolver: zodResolver(BandSchema),
     defaultValues: { status: "ACTIVE" },
@@ -20,6 +22,7 @@ export default function Create({ setIsOpen }: Props) {
   const onSubmit = async (data: BandFormData) => {
     const handJSON = JSON.stringify(data);
     try {
+      setIsLoading(true);
       const response = await fetch("http://localhost:3001/api/band", {
         method: "POST",
         body: handJSON,
@@ -27,6 +30,9 @@ export default function Create({ setIsOpen }: Props) {
       });
 
       const data = await response.json();
+      setTimeout(() => {
+        (setIsLoading(false), 2000);
+      });
     } catch (e: unknown) {
       console.error(e);
     }
@@ -88,7 +94,16 @@ export default function Create({ setIsOpen }: Props) {
           </div>
 
           <div className="flex justify-end">
-            <Button>Salvar</Button>
+            <Button
+              disabled={isLoading}
+              className="flex w-[120px]justify-center"
+            >
+              {isLoading ? (
+                <Loading width={20} height={20} showText={false} />
+              ) : (
+                "Salvar"
+              )}
+            </Button>
           </div>
         </form>
       </div>
