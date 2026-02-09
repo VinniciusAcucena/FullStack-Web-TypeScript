@@ -17,7 +17,20 @@ export default function Create({ setIsOpen }: Props) {
     defaultValues: { status: "ACTIVE" },
   });
 
-  const onSubmit = (data: BandFormData) => {};
+  const onSubmit = async (data: BandFormData) => {
+    const handJSON = JSON.stringify(data);
+    try {
+      const response = await fetch("http://localhost:3001/api/band", {
+        method: "POST",
+        body: handJSON,
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const data = await response.json();
+    } catch (e: unknown) {
+      console.error(e);
+    }
+  };
   return (
     <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
       <div className="bg-white p-8 rounded shadow-lg w-full max-w-3xl relative">
