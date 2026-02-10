@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Dispatch, SetStateAction, useState } from "react";
 import { useForm } from "react-hook-form";
 import z, { set } from "zod";
+import toast, { Toaster } from "react-hot-toast";
 
 interface Props {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
@@ -29,12 +30,23 @@ export default function Create({ setIsOpen }: Props) {
         headers: { "Content-Type": "application/json" },
       });
 
-      const data = await response.json();
+      if (response.status === 201) {
+        toast.success("Banda cadastrada com sucesso!");
+      } else if (response.status === 409) {
+        toast.error("Banda já cadastrada!");
+      } else {
+        throw new Error("Erro ao cadastrar banda");
+      }
+
       setTimeout(() => {
         (setIsLoading(false), 2000);
       });
     } catch (e: unknown) {
       console.error(e);
+
+      if (e instanceof Error) {
+        toast.error(e.message);
+      }
     }
   };
   return (
@@ -107,6 +119,7 @@ export default function Create({ setIsOpen }: Props) {
           </div>
         </form>
       </div>
+      <Toaster />
     </div>
   );
 }

@@ -46,10 +46,13 @@ export async function POST(request: Request) {
         data: validateData,
       });
 
-      return Response.json({
-        msg: "JSON de uma banda recebido",
-        insertedItem,
-      });
+      return Response.json(
+        {
+          msg: "JSON de uma banda recebido",
+          insertedItem,
+        },
+        { status: 201 },
+      );
     } else {
       return Response.json(
         { msg: "Formato de dados inválido" },
