@@ -2,17 +2,16 @@
 
 import Button from "@/app/components/Button";
 import { Band } from "../../../../../generated/prisma";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Loading from "../../../components/Loading";
 import Pagination from "./Pagination";
+import { BandList } from "../types/common";
 
-interface BandList {
-  pagination: {
-    currentPage: number;
-    totalItems: number;
-    totalPages: number;
-  };
-  bands: Band[];
+interface Props {
+  data: BandList | null;
+  loading: boolean;
+  currentPage: number;
+  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const TableRow = ({ band }: { band: Band }) => {
@@ -37,31 +36,12 @@ const TableRow = ({ band }: { band: Band }) => {
   );
 };
 
-export default function List() {
-  const [data, setData] = useState<BandList | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [currentPage, setCurrentPage] = useState<number>(1);
-
-  useEffect(() => {
-    const fetchBands = async (page: number) => {
-      try {
-        setData(null);
-        setLoading(true);
-        const response = await fetch(
-          `http://localhost:3001/api/band?page=${page}&take=10`,
-        );
-        const bandList: BandList = await response.json();
-
-        setData(bandList);
-        setLoading(false);
-      } catch (error: unknown) {
-        console.log("Error");
-      }
-    };
-
-    fetchBands(currentPage);
-  }, [currentPage]);
-
+export default function List({
+  data,
+  loading,
+  currentPage,
+  setCurrentPage,
+}: Props) {
   return (
     <div>
       <table className="min-w-full border border-gray-200 rounded-sm overflow-hidden">

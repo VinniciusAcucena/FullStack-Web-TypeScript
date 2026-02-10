@@ -9,11 +9,17 @@ import toast, { Toaster } from "react-hot-toast";
 
 interface Props {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
+  onSuccess: () => void;
+  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
 type BandFormData = z.infer<typeof BandSchema>;
 
-export default function Create({ setIsOpen }: Props) {
+export default function Create({
+  setIsOpen,
+  onSuccess,
+  setCurrentPage,
+}: Props) {
   const [isLoading, setIsLoading] = useState(false);
   const { register, handleSubmit, formState } = useForm<BandFormData>({
     resolver: zodResolver(BandSchema),
@@ -32,21 +38,24 @@ export default function Create({ setIsOpen }: Props) {
 
       if (response.status === 201) {
         toast.success("Banda cadastrada com sucesso!");
+        onSuccess();
+        setCurrentPage(1);
+        setIsOpen(false);
       } else if (response.status === 409) {
         toast.error("Banda já cadastrada!");
       } else {
         throw new Error("Erro ao cadastrar banda");
       }
-
-      setTimeout(() => {
-        (setIsLoading(false), 2000);
-      });
     } catch (e: unknown) {
       console.error(e);
 
       if (e instanceof Error) {
         toast.error(e.message);
       }
+    } finally {
+      setTimeout(() => {
+        (setIsLoading(false), 2000);
+      });
     }
   };
   return (
@@ -119,14 +128,6 @@ export default function Create({ setIsOpen }: Props) {
           </div>
         </form>
       </div>
-      <Toaster
-        toastOptions={{
-          duration: 4000,
-          style: { padding: "24px", color: "#fff", fontSize: "16px" },
-          error: { style: { backgroundColor: "red" } },
-          success: { style: { backgroundColor: "green" } },
-        }}
-      />
     </div>
   );
 }
