@@ -119,7 +119,14 @@ export default function Create({ setIsOpen }: Props) {
           </div>
         </form>
       </div>
-      <Toaster />
+      <Toaster
+        toastOptions={{
+          duration: 4000,
+          style: { padding: "24px", color: "#fff", fontSize: "16px" },
+          error: { style: { backgroundColor: "red" } },
+          success: { style: { backgroundColor: "green" } },
+        }}
+      />
     </div>
   );
 }
