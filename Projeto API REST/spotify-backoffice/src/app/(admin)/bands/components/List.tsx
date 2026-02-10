@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 import Loading from "../../../components/Loading";
 import Pagination from "./Pagination";
 import { BandList } from "../types/common";
+import Edit from "./Edit";
 
 interface Props {
   data: BandList | null;
@@ -14,34 +15,44 @@ interface Props {
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const TableRow = ({ band }: { band: Band }) => {
-  return (
-    <tr>
-      <td className="px-6 py-4 whitespace-nowrap text-gray-800">{band.name}</td>
-      <td className="px-6 py-4 whitespace-nowrap text-gray-800">
-        {band.description && band.description.length > 50
-          ? `${band.description.slice(0, 50)}...`
-          : band.description}
-      </td>
-      <td className="px-6 py-4 whitespace-nowrap text-gray-800">
-        <span className="inline-flex items-center px-2 py-0.5 rounded bg-green-100 text-green-800">
-          {band.status}
-        </span>
-      </td>
-      <td className="text-right font-medium space-x-4 whitespace-nowrap">
-        <Button>Editar</Button>
-        <Button>Excluir</Button>
-      </td>
-    </tr>
-  );
-};
-
 export default function List({
   data,
   loading,
   currentPage,
   setCurrentPage,
 }: Props) {
+  const [bandEdit, setBandEdit] = useState<Band | null>(null);
+  const [editIsOpen, setEditIsOpen] = useState<boolean>(false);
+
+  const handleEditClick = (band: Band) => {
+    setBandEdit(band);
+    setEditIsOpen(true);
+  };
+
+  const TableRow = ({ band }: { band: Band }) => {
+    return (
+      <tr>
+        <td className="px-6 py-4 whitespace-nowrap text-gray-800">
+          {band.name}
+        </td>
+        <td className="px-6 py-4 whitespace-nowrap text-gray-800">
+          {band.description && band.description.length > 50
+            ? `${band.description.slice(0, 50)}...`
+            : band.description}
+        </td>
+        <td className="px-6 py-4 whitespace-nowrap text-gray-800">
+          <span className="inline-flex items-center px-2 py-0.5 rounded bg-green-100 text-green-800">
+            {band.status}
+          </span>
+        </td>
+        <td className="text-right font-medium space-x-4 whitespace-nowrap">
+          <Button onClick={() => handleEditClick(band)}>Editar</Button>
+          <Button>Excluir</Button>
+        </td>
+      </tr>
+    );
+  };
+
   return (
     <div>
       <table className="min-w-full border border-gray-200 rounded-sm overflow-hidden">
@@ -76,6 +87,15 @@ export default function List({
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
         ></Pagination>
+      )}
+
+      {editIsOpen && bandEdit && (
+        <Edit
+          band={bandEdit}
+          setIsOpen={setEditIsOpen}
+          onSuccess={() => {}}
+          setCurrentPage={setCurrentPage}
+        ></Edit>
       )}
     </div>
   );
