@@ -7,6 +7,7 @@ import Loading from "../../../components/Loading";
 import Pagination from "./Pagination";
 import { BandList } from "../types/common";
 import Edit from "./Edit";
+import Remove from "./Remove";
 
 interface Props {
   data: BandList | null;
@@ -26,9 +27,16 @@ export default function List({
   const [bandEdit, setBandEdit] = useState<Band | null>(null);
   const [editIsOpen, setEditIsOpen] = useState<boolean>(false);
 
+  const [bandRemove, setBandRemove] = useState<Band | null>(null);
+  const [removeIsOpen, setRemoveIsOpen] = useState<boolean>(false);
+
   const handleEditClick = (band: Band) => {
     setBandEdit(band);
     setEditIsOpen(true);
+  };
+  const handleRemoveClick = (band: Band) => {
+    setBandRemove(band);
+    setRemoveIsOpen(true);
   };
 
   const TableRow = ({ band }: { band: Band }) => {
@@ -51,7 +59,7 @@ export default function List({
         </td>
         <td className="text-right font-medium space-x-4 whitespace-nowrap">
           <Button onClick={() => handleEditClick(band)}>Editar</Button>
-          <Button>Excluir</Button>
+          <Button onClick={() => handleRemoveClick(band)}>Excluir</Button>
         </td>
       </tr>
     );
@@ -100,6 +108,15 @@ export default function List({
           onSuccess={() => onSuccess()}
           setCurrentPage={setCurrentPage}
         ></Edit>
+      )}
+
+      {removeIsOpen && bandRemove && (
+        <Remove
+          band={bandRemove}
+          setIsOpen={setRemoveIsOpen}
+          onSuccess={() => onSuccess()}
+          setCurrentPage={setCurrentPage}
+        ></Remove>
       )}
     </div>
   );
