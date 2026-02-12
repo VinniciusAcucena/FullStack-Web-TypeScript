@@ -13,6 +13,7 @@ interface Props {
   loading: boolean;
   currentPage: number;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
+  onSuccess: () => void;
 }
 
 export default function List({
@@ -20,6 +21,7 @@ export default function List({
   loading,
   currentPage,
   setCurrentPage,
+  onSuccess,
 }: Props) {
   const [bandEdit, setBandEdit] = useState<Band | null>(null);
   const [editIsOpen, setEditIsOpen] = useState<boolean>(false);
@@ -95,7 +97,7 @@ export default function List({
         <Edit
           band={bandEdit}
           setIsOpen={setEditIsOpen}
-          onSuccess={() => {}}
+          onSuccess={() => onSuccess()}
           setCurrentPage={setCurrentPage}
         ></Edit>
       )}

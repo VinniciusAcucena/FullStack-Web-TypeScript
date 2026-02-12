@@ -42,6 +42,7 @@ export default function ManageCSR() {
         loading={loading}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
+        onSuccess={() => fetchBands()}
       ></List>
       {isOpen && (
         <Create
