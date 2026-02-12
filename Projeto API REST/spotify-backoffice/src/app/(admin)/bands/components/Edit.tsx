@@ -1,6 +1,6 @@
 import Button from "@/app/components/Button";
 import Loading from "@/app/components/Loading";
-import { BandSchema } from "@/app/schemas/band.schema";
+import { BandPatchSchema, BandSchema } from "@/app/schemas/band.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -15,7 +15,7 @@ interface Props {
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
-type BandFormData = z.infer<typeof BandSchema>;
+type BandFormData = z.infer<typeof BandPatchSchema>;
 
 export default function Edit({
   band,
@@ -25,8 +25,11 @@ export default function Edit({
 }: Props) {
   const [isLoading, setIsLoading] = useState(false);
   const { register, handleSubmit, formState, reset } = useForm<BandFormData>({
-    resolver: zodResolver(BandSchema),
-    defaultValues: { status: "ACTIVE" },
+    resolver: zodResolver(BandPatchSchema),
+    defaultValues: {
+      id: band.id,
+      status: "ACTIVE",
+    },
   });
 
   const onSubmit = async (data: BandFormData) => {
@@ -34,20 +37,20 @@ export default function Edit({
     try {
       setIsLoading(true);
       const response = await fetch("http://localhost:3001/api/band", {
-        method: "POST",
+        method: "PATCH",
         body: handJSON,
         headers: { "Content-Type": "application/json" },
       });
 
-      if (response.status === 201) {
-        toast.success("Banda cadastrada com sucesso!");
+      if (response.status === 200) {
+        toast.success("Banda atualizada com sucesso!");
         onSuccess();
         setCurrentPage(1);
         setIsOpen(false);
-      } else if (response.status === 409) {
-        toast.error("Banda já cadastrada!");
+      } else if (response.status === 404) {
+        toast.error("Banda não encontrada");
       } else {
-        throw new Error("Erro ao cadastrar banda");
+        throw new Error("Erro ao atualizar banda");
       }
     } catch (e: unknown) {
       console.error(e);
@@ -68,6 +71,7 @@ export default function Edit({
         name: band.name,
         slug: band.slug,
         description: band.description || undefined,
+        status: band.status,
       });
     }
   }, [band, reset]);
@@ -85,6 +89,7 @@ export default function Edit({
           Atualizar banda
         </h2>
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
+          <input {...register("id")} type="hidden" />
           <div>
             <span className="font-semibold text-sm">Nome:</span>
             <input
@@ -128,10 +133,18 @@ export default function Edit({
           </div>
           <div>
             <span className="font-semibold text-sm">Status:</span>
-            <select className="w-full p-2 border rounded">
+            <select
+              {...register("status")}
+              className="w-full p-2 border rounded"
+            >
               <option value="ACTIVE">Ativo</option>
               <option value="INACTIVE">Inativo</option>
             </select>
+            {formState?.errors?.status && (
+              <p className="text-red-500 text-sm mt-1">
+                {formState.errors.status.message}
+              </p>
+            )}
           </div>
 
           <div className="flex justify-end">

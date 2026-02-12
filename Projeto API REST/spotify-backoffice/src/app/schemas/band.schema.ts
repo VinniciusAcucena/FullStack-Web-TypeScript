@@ -7,4 +7,11 @@ export const BandSchema = z.object({
   status: z.enum(["ACTIVE", "INACTIVE"]),
 });
 
+const uuidRegex =
+  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+export const BandPatchSchema = BandSchema.extend({
+  id: z.string("ID inválido").regex(uuidRegex, "ID inválido"),
+});
+
 export const BandArraySchema = z.array(BandSchema).min(1);

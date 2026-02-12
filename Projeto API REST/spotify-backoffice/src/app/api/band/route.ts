@@ -1,9 +1,10 @@
 import z from "zod";
 import prisma from "../../../../lib/prisma";
-import { BandSchema } from "@/app/schemas/band.schema";
+import { BandPatchSchema, BandSchema } from "@/app/schemas/band.schema";
 import { PrismaClientInitializationError } from "../../../../generated/prisma/runtime/library";
 import { CustomError } from "@/app/utils/CustomError";
 import { NextRequest } from "next/server";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 
 export async function GET(request: NextRequest) {
   const url = new URL(request.url);
@@ -106,8 +107,37 @@ export function DELETE(request: Request) {
   return Response.json({ msg: "API método DELETE funcionando!" });
 }
 
-export function PATCH(request: Request) {
-  return Response.json({ msg: "API método PATCH funcionando!" });
+export async function PATCH(request: Request) {
+  try {
+    const formData = await request.json();
+
+    const data = {
+      id: formData.id,
+      name: formData.name,
+      slug: formData.slug,
+      description: formData.description,
+      status: formData.status,
+    };
+
+    const validateData = BandPatchSchema.parse(data);
+    console.log("Dados recebidos para PATCH:", validateData);
+
+    await prisma.band.update({
+      where: { id: validateData.id },
+      data: {
+        name: validateData.name,
+        slug: validateData.slug,
+        description: validateData.description,
+        status: validateData.status,
+      },
+    });
+    return Response.json({ msg: "Banda atualizada" }, { status: 200 });
+  } catch (error: unknown) {
+    if (error instanceof PrismaClientKnownRequestError) {
+      return Response.json({ msg: "Banda não encontrada" }, { status: 404 });
+    }
+    return Response.json({ msg: "Erro desconhecido" }, { status: 500 });
+  }
 }
 
 export function OPTIONS(request: Request) {
