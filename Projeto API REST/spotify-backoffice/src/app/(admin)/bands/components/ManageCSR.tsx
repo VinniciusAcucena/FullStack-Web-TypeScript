@@ -7,6 +7,8 @@ import Create from "./Create";
 import { useEffect, useState } from "react";
 import { Band } from "../../../../../generated/prisma";
 import { BandList } from "../types/common";
+import { fetchBandsAction } from "../actions/fetchBandsAction";
+import { set } from "zod";
 
 export default function ManageCSR() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -18,15 +20,15 @@ export default function ManageCSR() {
     try {
       setData(null);
       setLoading(true);
-      const response = await fetch(
-        `http://localhost:3001/api/band?page=${page}&take=10`,
-      );
-      const bandList: BandList = await response.json();
+
+      const bandList: BandList = await fetchBandsAction(page);
 
       setData(bandList);
       setLoading(false);
     } catch (error: unknown) {
       console.log("Error");
+    } finally {
+      setLoading(false);
     }
   };
   useEffect(() => {
