@@ -103,8 +103,31 @@ export function PUT(request: Request) {
   return Response.json({ msg: "API método PUT funcionando!" });
 }
 
-export function DELETE(request: Request) {
-  return Response.json({ msg: "API método DELETE funcionando!" });
+export async function DELETE(request: Request) {
+  try {
+    const data = await request.json();
+
+    const id = data.id;
+
+    if (id) {
+      const deletedItem = await prisma.band.delete({
+        where: { id: id },
+      });
+    } else {
+      throw new CustomError("ID não informado", 400);
+    }
+
+    console.log("Dados recebidos para DELETE:", data);
+    return Response.json({ msg: "Banda removida" }, { status: 200 });
+  } catch (error: unknown) {
+    if (error instanceof CustomError) {
+      return Response.json(
+        { msg: error.message },
+        { status: error.statusCode },
+      );
+    }
+    return Response.json({ msg: "Erro desconhecido" }, { status: 500 });
+  }
 }
 
 export async function PATCH(request: Request) {
@@ -120,7 +143,6 @@ export async function PATCH(request: Request) {
     };
 
     const validateData = BandPatchSchema.parse(data);
-    console.log("Dados recebidos para PATCH:", validateData);
 
     await prisma.band.update({
       where: { id: validateData.id },
