@@ -2,7 +2,13 @@ import Button from "@/app/components/Button";
 import Loading from "@/app/components/Loading";
 import { BandSchema } from "@/app/schemas/band.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Dispatch, SetStateAction, useActionState, useState } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  useActionState,
+  useEffect,
+  useState,
+} from "react";
 import { useForm } from "react-hook-form";
 import z, { set } from "zod";
 import toast, { Toaster } from "react-hot-toast";
@@ -17,13 +23,26 @@ interface Props {
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const INITIAL_STATE: CreateBandFormState = { ok: false };
+const INITIAL_STATE: CreateBandFormState = { status: "idle", ok: false };
 
-export default function Create({ setIsOpen }: Props) {
+export default function Create({
+  setIsOpen,
+  onSuccess,
+  setCurrentPage,
+}: Props) {
   const [isLoading] = useState(false);
   const [state, formAction] = useActionState(createBandAction, INITIAL_STATE);
 
-  console.log("state", state);
+  useEffect(() => {
+    if (state.status === "success") {
+      toast.success(state.message ? state.message : "Banda criada com sucesso");
+      onSuccess();
+      setCurrentPage(1);
+      setIsOpen(false);
+    } else if (state.status === "error") {
+      toast.error(state.message ? state.message : "Erro ao criar banda");
+    }
+  }, [state]);
 
   return (
     <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">

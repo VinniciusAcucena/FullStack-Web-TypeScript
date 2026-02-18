@@ -5,6 +5,7 @@ import { treeifyError } from "zod/v4/core";
 import prisma from "../../../../../lib/prisma";
 
 export type CreateBandFormState = {
+  status: "idle" | "loading" | "success" | "error";
   ok: boolean;
   message?: string;
   errors?: Record<string, { errors: string[] }> | undefined;
@@ -26,6 +27,7 @@ export async function createBandAction(
     const treeErrors = treeifyError(validateData.error);
     console.log(treeErrors.properties);
     return {
+      status: "error",
       ok: false,
       message: "verifique os campos",
       errors: treeErrors.properties,
@@ -38,6 +40,7 @@ export async function createBandAction(
 
   if (bandExists) {
     return {
+      status: "error",
       ok: false,
       message: "Banda já cadastrada",
     };
@@ -52,5 +55,5 @@ export async function createBandAction(
     },
   });
 
-  return { ok: true, message: "Banda criada com sucesso" };
+  return { status: "success", ok: true, message: "Banda criada com sucesso" };
 }
