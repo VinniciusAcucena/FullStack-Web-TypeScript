@@ -47,6 +47,11 @@ export default function Create({ setIsOpen }: Props) {
               placeholder="Nome da banda"
               className="w-full p-2 border rounded"
             />
+            {state?.errors?.name && (
+              <p className="text-red-500 text-sm">
+                {state.errors.name.errors.join(",")}
+              </p>
+            )}
           </div>
           <div>
             <span className="font-semibold text-sm">Slug:</span>
@@ -56,6 +61,11 @@ export default function Create({ setIsOpen }: Props) {
               placeholder="nome-da-banda"
               className="w-full p-2 border rounded"
             />
+            {state?.errors?.slug && (
+              <p className="text-red-500 text-sm">
+                {state.errors.slug.errors.join(",")}
+              </p>
+            )}
           </div>
           <div>
             <span className="font-semibold text-sm">Descrição:</span>

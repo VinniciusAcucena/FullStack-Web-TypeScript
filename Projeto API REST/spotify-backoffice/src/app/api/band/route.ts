@@ -99,10 +99,6 @@ export async function POST(request: Request) {
   }
 }
 
-export function PUT(request: Request) {
-  return Response.json({ msg: "API método PUT funcionando!" });
-}
-
 export async function DELETE(request: Request) {
   try {
     const data = await request.json();
@@ -160,12 +156,4 @@ export async function PATCH(request: Request) {
     }
     return Response.json({ msg: "Erro desconhecido" }, { status: 500 });
   }
-}
-
-export function OPTIONS(request: Request) {
-  return Response.json({ msg: "API método OPTIONS funcionando!" });
-}
-
-export function HEAD(request: Request) {
-  return Response.json({ msg: "API método HEAD funcionando!" });
 }
