@@ -2,6 +2,7 @@
 
 import { BandSchema } from "@/app/schemas/band.schema";
 import { treeifyError } from "zod/v4/core";
+import prisma from "../../../../../lib/prisma";
 
 export type CreateBandFormState = {
   ok: boolean;
@@ -30,6 +31,26 @@ export async function createBandAction(
       errors: treeErrors.properties,
     };
   }
+
+  const bandExists = await prisma.band.findUnique({
+    where: { name: validateData.data.name },
+  });
+
+  if (bandExists) {
+    return {
+      ok: false,
+      message: "Banda já cadastrada",
+    };
+  }
+
+  await prisma.band.create({
+    data: {
+      name: validateData.data.name,
+      slug: validateData.data.slug,
+      description: validateData.data.description,
+      status: validateData.data.status,
+    },
+  });
 
   return { ok: true, message: "Banda criada com sucesso" };
 }
