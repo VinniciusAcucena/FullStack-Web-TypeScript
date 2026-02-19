@@ -7,4 +7,11 @@ export const TrackSchema = z.object({
   status: z.enum(["ACTIVE", "INACTIVE"]).default("ACTIVE"),
 });
 
+const uuidRegex =
+  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+export const TrackPatchSchema = TrackSchema.extend({
+  id: z.string("ID inválido").regex(uuidRegex, "ID inválido"),
+});
+
 export const TrackArraySchema = z.array(TrackSchema).min(1);
