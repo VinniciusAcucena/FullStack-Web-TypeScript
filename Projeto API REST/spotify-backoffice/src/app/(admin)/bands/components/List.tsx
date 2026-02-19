@@ -2,7 +2,7 @@
 
 import Button from "@/app/components/Button";
 import { Band } from "../../../../../generated/prisma";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Loading from "../../../components/Loading";
 import Pagination from "./Pagination";
 import { BandList } from "../types/common";

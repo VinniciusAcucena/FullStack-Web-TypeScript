@@ -1,7 +1,7 @@
 import Button from "@/app/components/Button";
-import { BandPatchSchema, BandSchema } from "@/app/schemas/band.schema";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import z, { set } from "zod";
+import { BandPatchSchema } from "@/app/schemas/band.schema";
+import { Dispatch, SetStateAction } from "react";
+import z from "zod";
 import { Band } from "../../../../../generated/prisma";
 import toast from "react-hot-toast";
 

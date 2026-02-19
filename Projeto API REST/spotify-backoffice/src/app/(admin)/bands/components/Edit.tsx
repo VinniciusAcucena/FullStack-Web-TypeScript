@@ -1,11 +1,11 @@
 import Button from "@/app/components/Button";
 import Loading from "@/app/components/Loading";
-import { BandPatchSchema, BandSchema } from "@/app/schemas/band.schema";
+import { BandPatchSchema } from "@/app/schemas/band.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import z, { set } from "zod";
-import toast, { Toaster } from "react-hot-toast";
+import z from "zod";
+import toast from "react-hot-toast";
 import { Band } from "../../../../../generated/prisma";
 
 interface Props {

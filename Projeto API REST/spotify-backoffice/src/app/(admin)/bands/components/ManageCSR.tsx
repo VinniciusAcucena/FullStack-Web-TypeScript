@@ -5,10 +5,8 @@ import Button from "@/app/components/Button";
 import List from "./List";
 import Create from "./Create";
 import { useEffect, useState } from "react";
-import { Band } from "../../../../../generated/prisma";
 import { BandList } from "../types/common";
 import { fetchBandsAction } from "../actions/fetchBandsAction";
-import { set } from "zod";
 
 export default function ManageCSR() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
