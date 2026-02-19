@@ -8,7 +8,6 @@ import Pagination from "./Pagination";
 import { TrackList } from "../types/common";
 import Edit from "./Edit";
 import Remove from "./Remove";
-import { TrackWithBand } from "../actions/fetchTracksAction";
 
 interface Props {
   data: TrackList | null;

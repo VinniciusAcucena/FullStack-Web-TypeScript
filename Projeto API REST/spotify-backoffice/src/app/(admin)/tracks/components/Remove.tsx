@@ -12,7 +12,7 @@ interface Props {
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
-type BandFormData = z.infer<typeof BandPatchSchema>;
+type TrackFormData = z.infer<typeof TrackPatchSchema>;
 
 export default function Remove({
   track,
@@ -22,10 +22,10 @@ export default function Remove({
 }: Props) {
   const handleRemove = async () => {
     const body = JSON.stringify({
-      id: band.id,
+      id: track.id,
     });
 
-    const response = await fetch(`http://localhost:3001/api/band`, {
+    const response = await fetch(`http://localhost:3001/api/track`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -34,14 +34,14 @@ export default function Remove({
     });
 
     if (response.status === 200) {
-      toast.success("Banda removida com sucesso!");
+      toast.success("Música removida com sucesso!");
       onSuccess();
       setCurrentPage(1);
       setIsOpen(false);
     } else if (response.status === 400) {
-      toast.error("Banda não encontrada");
+      toast.error("Música não encontrada");
     } else {
-      throw new Error("Erro ao remover banda");
+      throw new Error("Erro ao remover música");
     }
   };
 
@@ -56,9 +56,9 @@ export default function Remove({
           &times;
         </button>
         <h2 className="text-xl font-semibold text-gray-800 mb-4">
-          Confirmar remoção da banda
+          Confirmar remoção da música
         </h2>
-        <p>Banda: {band.name}</p>
+        <p>Música: {track.title}</p>
         <p>A operação não poderá ser desfeita</p>
         <Button
           className="flex w-30 justify-center mt-6"

@@ -1,6 +1,7 @@
 import z from "zod";
 import prisma from "../../../../lib/prisma";
 import { TrackSchema } from "@/app/schemas/track.schema";
+import { CustomError } from "@/app/utils/CustomError";
 
 const TrackArraySchema = z.array(TrackSchema).min(1);
 
@@ -43,22 +44,33 @@ export async function POST(request: Request) {
   }
 }
 
-export function PUT(request: Request) {
-  return Response.json({ msg: "API método PUT funcionando!" });
-}
+export async function DELETE(request: Request) {
+  try {
+    const data = await request.json();
 
-export function DELETE(request: Request) {
-  return Response.json({ msg: "API método DELETE funcionando!" });
+    const id = data.id;
+
+    if (id) {
+      const deletedItem = await prisma.track.delete({
+        where: { id: id },
+      });
+    } else {
+      throw new CustomError("ID não informado", 400);
+    }
+
+    console.log("Dados recebidos para DELETE:", data);
+    return Response.json({ msg: "Música removida" }, { status: 200 });
+  } catch (error: unknown) {
+    if (error instanceof CustomError) {
+      return Response.json(
+        { msg: error.message },
+        { status: error.statusCode },
+      );
+    }
+    return Response.json({ msg: "Erro desconhecido" }, { status: 500 });
+  }
 }
 
 export function PATCH(request: Request) {
   return Response.json({ msg: "API método PATCH funcionando!" });
-}
-
-export function OPTIONS(request: Request) {
-  return Response.json({ msg: "API método OPTIONS funcionando!" });
-}
-
-export function HEAD(request: Request) {
-  return Response.json({ msg: "API método HEAD funcionando!" });
 }
