@@ -12,6 +12,13 @@ export async function fetchTracksAction(page: number = 1, take: number = 10) {
     skip,
     take,
     orderBy: { createdAt: "asc" },
+    include: {
+      band: {
+        select: {
+          name: true,
+        },
+      },
+    },
   });
 
   const totalPages = Math.ceil(totalItems / take);

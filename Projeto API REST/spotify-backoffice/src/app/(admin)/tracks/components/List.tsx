@@ -8,6 +8,7 @@ import Pagination from "./Pagination";
 import { TrackList } from "../types/common";
 import Edit from "./Edit";
 import Remove from "./Remove";
+import { TrackWithBand } from "../actions/fetchTracksAction";
 
 interface Props {
   data: TrackList | null;
@@ -39,11 +40,14 @@ export default function List({
     setRemoveIsOpen(true);
   };
 
-  const TableRow = ({ track }: { track: Track }) => {
+  const TableRow = ({ track }: { track: any }) => {
     return (
       <tr>
         <td className="px-6 py-4 whitespace-nowrap text-gray-800">
           {track.title}
+        </td>
+        <td className="px-6 py-4 whitespace-nowrap text-gray-800">
+          {track.band.name}
         </td>
         <td className="px-6 py-4 whitespace-nowrap text-gray-800">
           {track.durationInSeconds}
@@ -70,6 +74,9 @@ export default function List({
           <tr>
             <th scope="col" className="px-6 py-3">
               Titulo
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Banda
             </th>
             <th scope="col" className="px-6 py-3">
               Duração em segundos
