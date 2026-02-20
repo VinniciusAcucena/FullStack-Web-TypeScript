@@ -7,7 +7,11 @@ import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 const TrackArraySchema = z.array(TrackSchema).min(1);
 
 export async function GET(request: Request) {
-  const items = await prisma.track.findMany();
+  const items = await prisma.track.findMany({
+    include: {
+      band: true,
+    },
+  });
   return Response.json(items);
 }
 

@@ -15,11 +15,7 @@ export async function GET(request: NextRequest) {
   const skip: number = (currentPage - 1) * take;
 
   const totalItems = await prisma.band.count();
-  const items = await prisma.band.findMany({
-    skip,
-    take,
-    orderBy: { createdAt: "asc" },
-  });
+  const items = await prisma.band.findMany();
 
   const totalPages = Math.ceil(totalItems / take);
   return Response.json({

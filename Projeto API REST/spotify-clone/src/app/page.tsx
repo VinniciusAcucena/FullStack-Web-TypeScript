@@ -2,8 +2,21 @@ import Image from "next/image";
 import Link from "next/link";
 import { Search, Plus, ChevronRight } from "lucide-react";
 import { Button } from "@/app/components/ui/button";
+import { fetchBands, fetchTracks } from "./actions/fetchItems";
 
-export default function SpotifyHomePage() {
+interface Band {
+  name: string;
+  description: string;
+}
+
+interface Track {
+  title: string;
+  durationInSeconds: number;
+  bandId: string;
+  band: Band;
+}
+
+export default async function SpotifyHomePage() {
   return (
     <div className="flex flex-col h-screen bg-black text-white">
       <header className="flex items-center justify-between p-4 bg-black">
@@ -75,16 +88,16 @@ export default function SpotifyHomePage() {
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-4">
-              {trendingSongs.map((song, index) => (
+              {trendingSongs.map((track, index) => (
                 <div
                   key={index}
                   className="bg-[#181818] p-3 rounded-md hover:bg-[#282828] transition-all cursor-pointer"
                 >
                   <h3 className="font-semibold text-sm truncate">
-                    {song.title}
+                    {track.title}
                   </h3>
                   <p className="text-gray-400 text-xs mt-1 truncate">
-                    {song.artist}
+                    {track.band.name}
                   </p>
                 </div>
               ))}
@@ -104,15 +117,17 @@ export default function SpotifyHomePage() {
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-4">
-              {popularArtists.map((artist, index) => (
+              {popularArtists.map((band, index) => (
                 <div
                   key={index}
                   className="bg-[#181818] p-3 rounded-md hover:bg-[#282828] transition-all cursor-pointer"
                 >
                   <h3 className="font-semibold text-sm truncate">
-                    {artist.name}
+                    {band.name}
                   </h3>
-                  <p className="text-gray-400 text-xs mt-1">Artista</p>
+                  <p className="text-gray-400 text-xs mt-1">
+                    {band.description}
+                  </p>
                 </div>
               ))}
             </div>
@@ -136,88 +151,6 @@ export default function SpotifyHomePage() {
   );
 }
 
-const trendingSongs = [
-  {
-    title: "Kiss Me Now",
-    artist: "Pierce The Veil",
-    image: "/placeholder.svg?height=200&width=200",
-  },
-  {
-    title: "Nope your too late i already died",
-    artist: "wifiskeleton, i wanna be a jack-o-lantern",
-    image: "/placeholder.svg?height=200&width=200",
-  },
-  {
-    title: "Gnarly",
-    artist: "KATSEYE",
-    image: "/placeholder.svg?height=200&width=200",
-  },
-  {
-    title: "Pretty Little Baby",
-    artist: "Connie Francis",
-    image: "/placeholder.svg?height=200&width=200",
-  },
-  {
-    title: "Me Prometi",
-    artist: "Ivan Cornejo",
-    image: "/placeholder.svg?height=200&width=200",
-  },
-  {
-    title: "peliculiando",
-    artist: "Fuerza Regida",
-    image: "/placeholder.svg?height=200&width=200",
-  },
-  {
-    title: "Burning Blue",
-    artist: "Mariah the Scientist",
-    image: "/placeholder.svg?height=200&width=200",
-  },
-];
+const trendingSongs: Track[] = await fetchTracks();
 
-const popularArtists = [
-  { name: "Kendrick Lamar", image: "/placeholder.svg?height=200&width=200" },
-  { name: "Drake", image: "/placeholder.svg?height=200&width=200" },
-  { name: "The Weeknd", image: "/placeholder.svg?height=200&width=200" },
-  { name: "Lady Gaga", image: "/placeholder.svg?height=200&width=200" },
-  { name: "Post Malone", image: "/placeholder.svg?height=200&width=200" },
-  { name: "Rihanna", image: "/placeholder.svg?height=200&width=200" },
-  { name: "Billie Eilish", image: "/placeholder.svg?height=200&width=200" },
-];
-
-const popularAlbums = [
-  {
-    title: "Album 1",
-    artist: "Artist 1",
-    image: "/placeholder.svg?height=200&width=200",
-  },
-  {
-    title: "Album 2",
-    artist: "Artist 2",
-    image: "/placeholder.svg?height=200&width=200",
-  },
-  {
-    title: "Album 3",
-    artist: "Artist 3",
-    image: "/placeholder.svg?height=200&width=200",
-  },
-  {
-    title: "Album 4",
-    artist: "Artist 4",
-    image: "/placeholder.svg?height=200&width=200",
-  },
-  {
-    title: "Album 5",
-    artist: "Artist 5",
-    image: "/placeholder.svg?height=200&width=200",
-  },
-  {
-    title: "Album 6",
-    artist: "Artist 6",
-    image: "/placeholder.svg?height=200&width=200",
-  },
-  {
-    title: "Album 7",
-    artist: "Artist 7",
-    image: "/placeholder.svg?height=200&width=200",
-  },
-];
+const popularArtists: Band[] = await fetchBands();
