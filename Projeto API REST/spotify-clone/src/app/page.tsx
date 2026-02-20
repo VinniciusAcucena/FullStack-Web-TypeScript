@@ -61,86 +61,6 @@ export default function SpotifyHomePage() {
       </header>
 
       <div className="flex flex-1 overflow-hidden">
-        <aside className="w-64 bg-black p-2 hidden md:block">
-          <div className="bg-[#121212] rounded-lg p-4 mb-2">
-            <div className="flex items-center justify-between mb-6">
-              <span className="font-bold">Sua Biblioteca</span>
-              <Plus className="w-5 h-5 text-gray-400 hover:text-white cursor-pointer" />
-            </div>
-
-            <div className="bg-[#242424] rounded-lg p-4 mb-4">
-              <h3 className="font-bold mb-1">Crie sua primeira playlist</h3>
-              <p className="text-sm text-gray-400 mb-4">
-                É fácil, vamos te ajudar.
-              </p>
-              <Button
-                variant="outline"
-                className="text-sm rounded-full px-4 py-1 bg-white text-black hover:bg-gray-200 border-none"
-              >
-                Criar playlist
-              </Button>
-            </div>
-
-            <div className="bg-[#242424] rounded-lg p-4">
-              <h3 className="font-bold mb-1">
-                Que tal seguir um podcast novo?
-              </h3>
-              <p className="text-sm text-gray-400 mb-4">
-                Avisaremos você sobre novos episódios.
-              </p>
-              <Button
-                variant="outline"
-                className="text-sm rounded-full px-4 py-1 bg-white text-black hover:bg-gray-200 border-none"
-              >
-                Explore podcasts
-              </Button>
-            </div>
-          </div>
-
-          <div className="bg-[#121212] rounded-lg p-4 mt-2 text-xs text-gray-400">
-            <div className="grid grid-cols-2 gap-2 mb-4">
-              <Link href="#" className="hover:text-white">
-                Legal
-              </Link>
-              <Link href="#" className="hover:text-white">
-                Segurança e Centro de privacidade
-              </Link>
-              <Link href="#" className="hover:text-white">
-                Política de privacidade
-              </Link>
-              <Link href="#" className="hover:text-white">
-                Cookies
-              </Link>
-              <Link href="#" className="hover:text-white">
-                Sobre anúncios
-              </Link>
-              <Link href="#" className="hover:text-white">
-                Acessibilidade
-              </Link>
-              <Link href="#" className="hover:text-white">
-                Notice at Collection
-              </Link>
-              <Link href="#" className="hover:text-white">
-                Your Privacy Choices
-              </Link>
-            </div>
-
-            <Button
-              variant="outline"
-              className="text-xs rounded-full px-3 py-1 border-[1px] border-gray-700 text-white bg-transparent hover:border-white"
-            >
-              <Image
-                src="/globe.png"
-                alt="Globe"
-                width={16}
-                height={16}
-                className="mr-2"
-              />
-              Português do Brasil
-            </Button>
-          </div>
-        </aside>
-
         <main className="flex-1 overflow-y-auto bg-gradient-to-b from-[#121212] to-black p-4">
           <section className="mb-8">
             <div className="flex justify-between items-center mb-4">
@@ -160,14 +80,6 @@ export default function SpotifyHomePage() {
                   key={index}
                   className="bg-[#181818] p-3 rounded-md hover:bg-[#282828] transition-all cursor-pointer"
                 >
-                  <div className="relative mb-4 aspect-square">
-                    <Image
-                      src={song.image || "/placeholder.svg"}
-                      alt={song.title}
-                      fill
-                      className="object-cover rounded-md"
-                    />
-                  </div>
                   <h3 className="font-semibold text-sm truncate">
                     {song.title}
                   </h3>
@@ -197,55 +109,10 @@ export default function SpotifyHomePage() {
                   key={index}
                   className="bg-[#181818] p-3 rounded-md hover:bg-[#282828] transition-all cursor-pointer"
                 >
-                  <div className="relative mb-4 aspect-square">
-                    <Image
-                      src={artist.image || "/placeholder.svg"}
-                      alt={artist.name}
-                      fill
-                      className="object-cover rounded-full"
-                    />
-                  </div>
                   <h3 className="font-semibold text-sm truncate">
                     {artist.name}
                   </h3>
                   <p className="text-gray-400 text-xs mt-1">Artista</p>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          <section className="mb-8">
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-2xl font-bold">Popular albums and singles</h2>
-              <Link
-                href="#"
-                className="text-sm text-gray-400 hover:text-white flex items-center"
-              >
-                Mostrar tudo
-                <ChevronRight className="w-4 h-4 ml-1" />
-              </Link>
-            </div>
-
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-4">
-              {popularAlbums.map((album, index) => (
-                <div
-                  key={index}
-                  className="bg-[#181818] p-3 rounded-md hover:bg-[#282828] transition-all cursor-pointer"
-                >
-                  <div className="relative mb-4 aspect-square">
-                    <Image
-                      src={album.image || "/placeholder.svg"}
-                      alt={album.title}
-                      fill
-                      className="object-cover rounded-md"
-                    />
-                  </div>
-                  <h3 className="font-semibold text-sm truncate">
-                    {album.title}
-                  </h3>
-                  <p className="text-gray-400 text-xs mt-1 truncate">
-                    {album.artist}
-                  </p>
                 </div>
               ))}
             </div>
