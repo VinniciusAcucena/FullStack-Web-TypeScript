@@ -15,7 +15,7 @@ interface Props {
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
-type BandFormData = z.infer<typeof TrackPatchSchema>;
+type TrackFormData = z.infer<typeof TrackPatchSchema>;
 
 export default function Edit({
   track,
@@ -24,7 +24,7 @@ export default function Edit({
   setCurrentPage,
 }: Props) {
   const [isLoading, setIsLoading] = useState(false);
-  const { register, handleSubmit, formState, reset } = useForm<BandFormData>({
+  const { register, handleSubmit, formState, reset } = useForm<TrackFormData>({
     resolver: zodResolver(TrackPatchSchema),
     defaultValues: {
       id: track.id,
@@ -32,25 +32,25 @@ export default function Edit({
     },
   });
 
-  const onSubmit = async (data: BandFormData) => {
+  const onSubmit = async (data: TrackFormData) => {
     const handJSON = JSON.stringify(data);
     try {
       setIsLoading(true);
-      const response = await fetch("http://localhost:3001/api/band", {
+      const response = await fetch("http://localhost:3001/api/track", {
         method: "PATCH",
         body: handJSON,
         headers: { "Content-Type": "application/json" },
       });
 
       if (response.status === 200) {
-        toast.success("Banda atualizada com sucesso!");
+        toast.success("Música atualizada com sucesso!");
         onSuccess();
         setCurrentPage(1);
         setIsOpen(false);
       } else if (response.status === 404) {
-        toast.error("Banda não encontrada");
+        toast.error("Música não encontrada");
       } else {
-        throw new Error("Erro ao atualizar banda");
+        throw new Error("Erro ao atualizar música");
       }
     } catch (e: unknown) {
       console.error(e);
@@ -66,15 +66,15 @@ export default function Edit({
   };
 
   useEffect(() => {
-    if (band) {
+    if (track) {
       reset({
-        name: band.name,
-        slug: band.slug,
-        description: band.description || undefined,
-        status: band.status,
+        title: track.title,
+        slug: track.slug,
+        durationInSeconds: track.durationInSeconds,
+        status: track.status,
       });
     }
-  }, [band, reset]);
+  }, [track, reset]);
   return (
     <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
       <div className="bg-white p-8 rounded shadow-lg w-full max-w-3xl relative">
@@ -86,21 +86,21 @@ export default function Edit({
           &times;
         </button>
         <h2 className="text-xl font-semibold text-gray-800 mb-4">
-          Atualizar banda
+          Atualizar música
         </h2>
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
           <input {...register("id")} type="hidden" />
           <div>
             <span className="font-semibold text-sm">Nome:</span>
             <input
-              {...register("name")}
+              {...register("title")}
               type="text"
-              placeholder="Nome da banda"
+              placeholder="Nome da música"
               className="w-full p-2 border rounded"
             />
-            {formState?.errors?.name && (
+            {formState?.errors?.title && (
               <p className="text-red-500 text-sm mt-1">
-                {formState.errors.name.message}
+                {formState.errors.title.message}
               </p>
             )}
           </div>
@@ -119,15 +119,16 @@ export default function Edit({
             )}
           </div>
           <div>
-            <span className="font-semibold text-sm">Descrição:</span>
-            <textarea
-              {...register("description")}
-              placeholder="Descrição da banda"
+            <span className="font-semibold text-sm">Duração em segundos:</span>
+            <input
+              type="number"
+              {...register("durationInSeconds", { valueAsNumber: true })}
+              placeholder="200"
               className="w-full p-2 border rounded"
             />
-            {formState?.errors?.description && (
+            {formState?.errors?.durationInSeconds && (
               <p className="text-red-500 text-sm mt-1">
-                {formState.errors.description.message}
+                {formState.errors.durationInSeconds.message}
               </p>
             )}
           </div>

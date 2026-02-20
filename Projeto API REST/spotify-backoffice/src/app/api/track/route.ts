@@ -1,7 +1,8 @@
 import z from "zod";
 import prisma from "../../../../lib/prisma";
-import { TrackSchema } from "@/app/schemas/track.schema";
+import { TrackPatchSchema, TrackSchema } from "@/app/schemas/track.schema";
 import { CustomError } from "@/app/utils/CustomError";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 
 const TrackArraySchema = z.array(TrackSchema).min(1);
 
@@ -71,6 +72,37 @@ export async function DELETE(request: Request) {
   }
 }
 
-export function PATCH(request: Request) {
-  return Response.json({ msg: "API método PATCH funcionando!" });
+export async function PATCH(request: Request) {
+  try {
+    const formData = await request.json();
+
+    const data = {
+      id: formData.id,
+      title: formData.title,
+      slug: formData.slug,
+      durationInSeconds: formData.durationInSeconds,
+      status: formData.status,
+    };
+
+    const validateData = TrackPatchSchema.parse(data);
+
+    await prisma.track.update({
+      where: { id: validateData.id },
+      data: {
+        title: validateData.title,
+        slug: validateData.slug,
+        durationInSeconds: validateData.durationInSeconds,
+        status: validateData.status,
+      },
+    });
+    return Response.json(
+      { msg: "música atualizada atualizada" },
+      { status: 200 },
+    );
+  } catch (error: unknown) {
+    if (error instanceof PrismaClientKnownRequestError) {
+      return Response.json({ msg: "música não encontrada" }, { status: 404 });
+    }
+    return Response.json({ msg: "Erro desconhecido" }, { status: 500 });
+  }
 }
