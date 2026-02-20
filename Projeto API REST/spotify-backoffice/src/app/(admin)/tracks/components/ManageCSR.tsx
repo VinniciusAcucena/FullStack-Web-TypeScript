@@ -14,7 +14,7 @@ export default function ManageCSR() {
   const [loading, setLoading] = useState<boolean>(true);
   const [currentPage, setCurrentPage] = useState<number>(1);
 
-  const fetchBands = async (page: number = 1) => {
+  const fetchTracks = async (page: number = 1) => {
     try {
       setData(null);
       setLoading(true);
@@ -30,7 +30,7 @@ export default function ManageCSR() {
     }
   };
   useEffect(() => {
-    fetchBands(currentPage);
+    fetchTracks(currentPage);
   }, [currentPage]);
   return (
     <section className="overflow-x-auto p-4">
@@ -42,12 +42,12 @@ export default function ManageCSR() {
         loading={loading}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
-        onSuccess={() => fetchBands()}
+        onSuccess={() => fetchTracks()}
       ></List>
       {isOpen && (
         <Create
           setIsOpen={setIsOpen}
-          onSuccess={() => fetchBands(1)}
+          onSuccess={() => fetchTracks(1)}
           setCurrentPage={setCurrentPage}
         ></Create>
       )}

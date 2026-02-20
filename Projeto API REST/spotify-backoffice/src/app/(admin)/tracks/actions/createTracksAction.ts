@@ -18,7 +18,8 @@ export async function createTrackAction(
   const data = {
     title: formData.get("title"),
     slug: formData.get("slug"),
-    durationInSeconds: formData.get("durationInSeconds") || "",
+    durationInSeconds: formData.get("durationInSeconds"),
+    bandId: formData.get("bandId"),
   };
 
   const validateData = TrackSchema.safeParse(data);
@@ -35,25 +36,38 @@ export async function createTrackAction(
   }
 
   const trackExists = await prisma.track.findUnique({
-    where: { title: validateData.data.title },
+    where: { slug: validateData.data.slug },
+  });
+
+  const bandExists = await prisma.band.findUnique({
+    where: { id: validateData.data.bandId },
   });
 
   if (trackExists) {
     return {
       status: "error",
       ok: false,
-      message: "Banda já cadastrada",
+      message: "música já cadastrada",
     };
   }
 
-  await prisma.track.create({
-    data: {
-      title: validateData.data.title,
-      slug: validateData.data.slug,
-      durationInSeconds: validateData.data.durationInSeconds,
-      status: validateData.data.status,
-    },
-  });
+  if (bandExists) {
+    await prisma.track.create({
+      data: {
+        title: validateData.data.title,
+        slug: validateData.data.slug,
+        durationInSeconds: validateData.data.durationInSeconds ?? 0,
+        status: validateData.data.status,
+        bandId: validateData.data.bandId,
+      },
+    });
+  } else {
+    return {
+      status: "error",
+      ok: false,
+      message: "Banda digitada não existente",
+    };
+  }
 
   return { status: "success", ok: true, message: "Música criada com sucesso" };
 }

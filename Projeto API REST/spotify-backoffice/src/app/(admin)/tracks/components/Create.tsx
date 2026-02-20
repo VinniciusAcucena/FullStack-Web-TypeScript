@@ -71,6 +71,20 @@ export default function Create({
             )}
           </div>
           <div>
+            <span className="font-semibold text-sm">Banda:</span>
+            <input
+              name="bandId"
+              type="text"
+              placeholder="ID da banda"
+              className="w-full p-2 border rounded"
+            />
+            {state?.errors?.bandId && (
+              <p className="text-red-500 text-sm">
+                {state.errors.bandId.errors.join(",")}
+              </p>
+            )}
+          </div>
+          <div>
             <span className="font-semibold text-sm">Slug:</span>
             <input
               name="slug"
@@ -87,12 +101,17 @@ export default function Create({
           <div>
             <span className="font-semibold text-sm">Duração em Segundos:</span>
             <input
-              name="DurationInSecond"
+              name="durationInSeconds"
               placeholder="180"
               type="number"
               className="w-full p-2 border rounded"
             />
           </div>
+          {state?.errors?.durationInSeconds && (
+            <p className="text-red-500 text-sm">
+              {state.errors.durationInSeconds.errors.join(",")}
+            </p>
+          )}
 
           <div className="flex justify-end">
             <Button
