@@ -4,11 +4,7 @@ import { Search, Plus, ChevronRight } from "lucide-react";
 import { Button } from "@/app/components/ui/button";
 import { fetchBands, fetchTracks } from "./actions/fetchItems";
 import TracksList from "./components/tracksList";
-
-interface Band {
-  name: string;
-  description: string;
-}
+import BandsList from "./components/bandsList";
 
 export default async function SpotifyHomePage() {
   return (
@@ -96,21 +92,7 @@ export default async function SpotifyHomePage() {
               </Link>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-4">
-              {popularArtists.map((band, index) => (
-                <div
-                  key={index}
-                  className="bg-[#181818] p-3 rounded-md hover:bg-[#282828] transition-all cursor-pointer"
-                >
-                  <h3 className="font-semibold text-sm truncate">
-                    {band.name}
-                  </h3>
-                  <p className="text-gray-400 text-xs mt-1">
-                    {band.description}
-                  </p>
-                </div>
-              ))}
-            </div>
+            <BandsList isRandom={true} limit={7} />
           </section>
         </main>
       </div>
@@ -130,5 +112,3 @@ export default async function SpotifyHomePage() {
     </div>
   );
 }
-
-const popularArtists: Band[] = await fetchBands();
