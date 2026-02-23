@@ -1,7 +1,11 @@
-export async function fetchTracks() {
+export async function fetchTracks(isRandom: boolean, limit?: number) {
   const response = await fetch("http://host.docker.internal:3001/api/track");
   const data = await response.json();
-  console.log(data);
+  if (isRandom) {
+    const shuffled = data.sort(() => Math.random() - 0.5);
+    console.log(data);
+    return shuffled.slice(0, limit);
+  }
   return data;
 }
 

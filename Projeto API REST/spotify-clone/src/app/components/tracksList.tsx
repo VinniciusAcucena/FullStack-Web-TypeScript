@@ -11,6 +11,11 @@ interface Track {
   band: Band;
 }
 
+interface Props {
+  limit?: number;
+  isRandom: boolean;
+}
+
 function formatDuration(durationInSeconds: number) {
   const minutes = Math.floor(durationInSeconds / 60);
   const seconds = durationInSeconds % 60;
@@ -20,8 +25,8 @@ function formatDuration(durationInSeconds: number) {
   return `${minutes}:${formattedSeconds}`;
 }
 
-export default async function TracksList() {
-  const trendingSongs: Track[] = await fetchTracks();
+export default async function TracksList({ limit, isRandom }: Props) {
+  const trendingSongs: Track[] = await fetchTracks(isRandom, limit);
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-4">
       {trendingSongs.map((track, index) => (

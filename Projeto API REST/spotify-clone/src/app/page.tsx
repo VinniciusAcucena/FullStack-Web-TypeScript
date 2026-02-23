@@ -81,7 +81,7 @@ export default async function SpotifyHomePage() {
               </Link>
             </div>
 
-            <TracksList />
+            <TracksList limit={7} isRandom={true} />
           </section>
 
           <section className="mb-8">
