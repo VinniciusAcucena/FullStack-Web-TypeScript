@@ -5,63 +5,12 @@ import { Button } from "@/app/components/ui/button";
 import { fetchBands, fetchTracks } from "./actions/fetchItems";
 import TracksList from "./components/tracksList";
 import BandsList from "./components/bandsList";
+import Header from "./components/header";
 
 export default async function SpotifyHomePage() {
   return (
     <div className="flex flex-col h-screen bg-black text-white">
-      <header className="flex items-center justify-between p-4 bg-black">
-        <div className="flex items-center">
-          <Link href="/">
-            <Image
-              src="/spotify-logo.png"
-              alt="Spotify"
-              width={132}
-              height={40}
-              className="w-8 h-8 md:w-[132px] md:h-[40px]"
-            />
-          </Link>
-        </div>
-
-        <div className="hidden md:flex items-center bg-[#242424] rounded-full px-3 py-2 flex-1 max-w-md mx-4">
-          <Search className="w-5 h-5 text-gray-400 mr-2" />
-          <input
-            type="text"
-            placeholder="O que você quer ouvir?"
-            className="bg-transparent border-none outline-none text-sm text-gray-300 w-full"
-          />
-        </div>
-
-        <div className="flex items-center gap-3">
-          <Link
-            href="#"
-            className="hidden md:block text-gray-300 text-sm hover:text-white"
-          >
-            Premium
-          </Link>
-          <Link
-            href="#"
-            className="hidden md:block text-gray-300 text-sm hover:text-white"
-          >
-            Suporte
-          </Link>
-          <Link
-            href="#"
-            className="hidden md:block text-gray-300 text-sm hover:text-white"
-          >
-            Baixar
-          </Link>
-          <div className="hidden md:block h-6 w-[1px] bg-gray-700 mx-2"></div>
-          <Link
-            href="#"
-            className="hidden md:block text-gray-300 text-sm hover:text-white"
-          >
-            Inscrever-se
-          </Link>
-          <Button className="bg-white text-black hover:bg-gray-200 rounded-full font-bold">
-            Entrar
-          </Button>
-        </div>
-      </header>
+      <Header />
 
       <div className="flex flex-1 overflow-hidden">
         <main className="flex-1 overflow-y-auto bg-gradient-to-b from-[#121212] to-black p-4">
