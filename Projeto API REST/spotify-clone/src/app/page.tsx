@@ -3,17 +3,11 @@ import Link from "next/link";
 import { Search, Plus, ChevronRight } from "lucide-react";
 import { Button } from "@/app/components/ui/button";
 import { fetchBands, fetchTracks } from "./actions/fetchItems";
+import TracksList from "./components/tracksList";
 
 interface Band {
   name: string;
   description: string;
-}
-
-interface Track {
-  title: string;
-  durationInSeconds: number;
-  bandId: string;
-  band: Band;
 }
 
 export default async function SpotifyHomePage() {
@@ -87,21 +81,7 @@ export default async function SpotifyHomePage() {
               </Link>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-4">
-              {trendingSongs.map((track, index) => (
-                <div
-                  key={index}
-                  className="bg-[#181818] p-3 rounded-md hover:bg-[#282828] transition-all cursor-pointer"
-                >
-                  <h3 className="font-semibold text-sm truncate">
-                    {track.title}
-                  </h3>
-                  <p className="text-gray-400 text-xs mt-1 truncate">
-                    {track.band.name}
-                  </p>
-                </div>
-              ))}
-            </div>
+            <TracksList />
           </section>
 
           <section className="mb-8">
@@ -150,7 +130,5 @@ export default async function SpotifyHomePage() {
     </div>
   );
 }
-
-const trendingSongs: Track[] = await fetchTracks();
 
 const popularArtists: Band[] = await fetchBands();
