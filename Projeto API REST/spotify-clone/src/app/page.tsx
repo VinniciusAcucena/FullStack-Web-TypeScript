@@ -33,7 +33,7 @@ export default async function SpotifyHomePage() {
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-2xl font-bold">Popular artists</h2>
               <Link
-                href="#"
+                href="/bands"
                 className="text-sm text-gray-400 hover:text-white flex items-center"
               >
                 Mostrar tudo

@@ -18,5 +18,5 @@ export async function fetchBands(isRandom: boolean, limit?: number) {
     return shuffled.slice(0, limit);
   }
   console.log(data);
-  return data;
+  return data.bands;
 }

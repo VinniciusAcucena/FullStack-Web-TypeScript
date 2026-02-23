@@ -1,9 +1,9 @@
 import Link from "next/link";
+import BandsList from "../components/bandsList";
 import Header from "../components/header";
-import TracksList from "../components/tracksList";
 import { ChevronLeft } from "lucide-react";
 
-export default function TracksPage() {
+export default function BandsPage() {
   return (
     <div>
       <Header></Header>
@@ -16,9 +16,9 @@ export default function TracksPage() {
       </Link>
       <section className="mb-8">
         <div className="flex flex-row justify-between items-center mb-4">
-          <h2 className="text-2xl font-bold">Todas as músicas</h2>
+          <h2 className="text-2xl font-bold">Todas as bandas</h2>
         </div>
-        <TracksList isRandom={false} />*
+        <BandsList isRandom={false} />*
       </section>
     </div>
   );
