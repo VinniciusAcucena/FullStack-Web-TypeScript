@@ -1,5 +1,7 @@
 export async function fetchTracks(isRandom: boolean, limit?: number) {
-  const response = await fetch("http://spotify-backoffice:3000/api/track");
+  const response = await fetch(
+    "https://projeto-api-rest-production-00e6.up.railway.app/}/api/track",
+  );
   const data = await response.json();
   if (isRandom) {
     const shuffled = data.sort(() => Math.random() - 0.5);
@@ -10,7 +12,9 @@ export async function fetchTracks(isRandom: boolean, limit?: number) {
 }
 
 export async function fetchBands(isRandom: boolean, limit?: number) {
-  const response = await fetch("http://spotify-backoffice:3000/api/band");
+  const response = await fetch(
+    "https://projeto-api-rest-production-00e6.up.railway.app/}/api/band",
+  );
   const data = await response.json();
   if (isRandom) {
     const shuffled = data.bands.sort(() => Math.random() - 0.5);
