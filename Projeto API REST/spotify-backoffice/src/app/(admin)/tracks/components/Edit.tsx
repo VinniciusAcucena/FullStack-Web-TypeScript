@@ -33,6 +33,7 @@ export default function Edit({
   });
 
   const onSubmit = async (data: TrackFormData) => {
+    console.log("submit chamado");
     const handJSON = JSON.stringify(data);
     try {
       setIsLoading(true);
@@ -68,6 +69,7 @@ export default function Edit({
   useEffect(() => {
     if (track) {
       reset({
+        id: track.id,
         title: track.title,
         slug: track.slug,
         durationInSeconds: track.durationInSeconds,
