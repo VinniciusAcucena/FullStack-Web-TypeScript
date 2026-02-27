@@ -8,6 +8,7 @@ export async function GET(
   try {
     const band = await prisma.band.findUnique({
       where: { id: params.id },
+      include: { tracks: true },
     });
     if (!band) {
       throw new CustomError("Banda não encontrada", 404);
