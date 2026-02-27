@@ -47,21 +47,24 @@ export default async function BandPage({ params }: { params: { id: string } }) {
             </div>
             <div className="m-4 p-2 rounded-md bg-[#181818]">
               <h3>Músicas</h3>
-              {band.tracks.map((track: any) => (
-                <div
-                  key={track.id}
-                  className="text-gray-300 rounded-md bg-[#252525] m-3 p-2 flex justify-between hover:bg-gray-700 hover:cursor-pointer"
-                >
-                  <div className="flex gap-2">
-                    <Image
-                      src={"/sem-musica.png"}
-                      alt={"Foto disco"}
-                      width={40}
-                      height={40}
-                    />
-                    <p>{track.title}</p>
+              {band.tracks.map((track: any, index: number) => (
+                <div className="px-3 flex gap-3 items-center w-full">
+                  <p>{index + 1}</p>
+                  <div
+                    key={track.id}
+                    className="text-gray-300 rounded-md bg-[#252525] m-3 p-2 flex justify-between w-full hover:bg-gray-700 hover:cursor-pointer"
+                  >
+                    <div className="flex gap-2 items-center">
+                      <Image
+                        src={"/sem-musica.png"}
+                        alt={"Foto disco"}
+                        width={40}
+                        height={40}
+                      />
+                      <p>{track.title}</p>
+                    </div>
+                    <p>{formatDuration(track.durationInSeconds)}</p>
                   </div>
-                  <p>{formatDuration(track.durationInSeconds)}</p>
                 </div>
               ))}
             </div>
