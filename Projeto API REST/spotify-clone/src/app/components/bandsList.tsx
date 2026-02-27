@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { fetchBands } from "../actions/fetchItems";
 import Image from "next/image";
 
@@ -7,6 +8,7 @@ interface Props {
 }
 
 interface Band {
+  id: string;
   name: string;
   description: string;
 }
@@ -20,17 +22,19 @@ export default async function BandsList({ limit, isRandom }: Props) {
           key={index}
           className="bg-[#181818] p-3 rounded-md hover:bg-[#282828] transition-all cursor-pointer"
         >
-          <Image
-            src={"/sem-perfil.png"}
-            alt={"Foto perfil"}
-            width={132}
-            height={40}
-            className="mr-1"
-          />
-          <h3 className="font-semibold text-sm truncate">{band.name}</h3>
-          <p className="text-gray-400 text-xs mt-1">
-            {band.description ? band.description : "*Sem descrição*"}
-          </p>
+          <Link href={`/bands/${band.id}`}>
+            <Image
+              src={"/sem-perfil.png"}
+              alt={"Foto perfil"}
+              width={132}
+              height={40}
+              className="mr-1"
+            />
+            <h3 className="font-semibold text-sm truncate">{band.name}</h3>
+            <p className="text-gray-400 text-xs mt-1">
+              {band.description ? band.description : "*Sem descrição*"}
+            </p>
+          </Link>
         </div>
       ))}
     </div>
