@@ -2,6 +2,7 @@ import Link from "next/link";
 import BandsList from "../components/bandsList";
 import Header from "../components/header";
 import { ChevronLeft } from "lucide-react";
+import Footer from "../components/footer";
 
 export default function BandsPage() {
   return (
@@ -20,6 +21,7 @@ export default function BandsPage() {
         </div>
         <BandsList isRandom={false} />*
       </section>
+      <Footer />
     </div>
   );
 }

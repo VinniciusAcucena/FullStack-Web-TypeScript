@@ -3,6 +3,7 @@ import Header from "@/app/components/header";
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import Footer from "@/app/components/footer";
 
 function formatDuration(durationInSeconds: number) {
   const minutes = Math.floor(durationInSeconds / 60);
@@ -17,7 +18,7 @@ export default async function BandPage({ params }: { params: { id: string } }) {
   const band = await findBandById(params.id);
   console.log(band);
   return (
-    <div>
+    <div className="flex flex-col h-screen">
       <Header></Header>
       <Link
         href="/"
@@ -61,6 +62,7 @@ export default async function BandPage({ params }: { params: { id: string } }) {
           <p>Banda não encontrada</p>
         )}
       </div>
+      <Footer />
     </div>
   );
 }

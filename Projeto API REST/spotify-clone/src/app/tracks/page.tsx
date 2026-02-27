@@ -2,10 +2,11 @@ import Link from "next/link";
 import Header from "../components/header";
 import TracksList from "../components/tracksList";
 import { ChevronLeft } from "lucide-react";
+import Footer from "../components/footer";
 
 export default function TracksPage() {
   return (
-    <div>
+    <div className="flex flex-col h-screen">
       <Header></Header>
       <Link
         href="/"
@@ -20,6 +21,7 @@ export default function TracksPage() {
         </div>
         <TracksList isRandom={false} />*
       </section>
+      <Footer />
     </div>
   );
 }

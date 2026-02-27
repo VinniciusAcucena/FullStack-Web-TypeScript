@@ -6,6 +6,7 @@ import { fetchBands, fetchTracks } from "./actions/fetchItems";
 import TracksList from "./components/tracksList";
 import BandsList from "./components/bandsList";
 import Header from "./components/header";
+import Footer from "./components/footer";
 
 export default async function SpotifyHomePage() {
   return (
@@ -46,18 +47,7 @@ export default async function SpotifyHomePage() {
         </main>
       </div>
 
-      <div className="bg-gradient-to-r from-purple-700 to-blue-500 p-3 flex justify-between items-center">
-        <div>
-          <p className="text-xs font-bold">Testar o Premium de graça</p>
-          <p className="text-xs">
-            Inscreva-se para curtir música ilimitada e podcasts só com alguns
-            anúncios. Não precisa de cartão de crédito.
-          </p>
-        </div>
-        <Button className="bg-white text-black hover:bg-gray-200 rounded-full text-sm font-bold whitespace-nowrap">
-          Inscreva-se grátis
-        </Button>
-      </div>
+      <Footer></Footer>
     </div>
   );
 }
