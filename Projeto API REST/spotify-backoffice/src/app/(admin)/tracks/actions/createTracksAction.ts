@@ -18,7 +18,7 @@ export async function createTrackAction(
   const data = {
     title: formData.get("title"),
     slug: formData.get("slug"),
-    durationInSeconds: formData.get("durationInSeconds"),
+    durationInSeconds: Number(formData.get("durationInSeconds")),
     bandId: formData.get("bandId"),
   };
 
