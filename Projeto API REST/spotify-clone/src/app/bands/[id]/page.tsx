@@ -52,7 +52,15 @@ export default async function BandPage({ params }: { params: { id: string } }) {
                   key={track.id}
                   className="text-gray-300 rounded-md bg-[#252525] m-3 p-2 flex justify-between hover:bg-gray-700 hover:cursor-pointer"
                 >
-                  <p>{track.title}</p>
+                  <div className="flex gap-2">
+                    <Image
+                      src={"/sem-musica.png"}
+                      alt={"Foto disco"}
+                      width={40}
+                      height={40}
+                    />
+                    <p>{track.title}</p>
+                  </div>
                   <p>{formatDuration(track.durationInSeconds)}</p>
                 </div>
               ))}

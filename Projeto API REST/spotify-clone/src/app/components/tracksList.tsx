@@ -36,7 +36,7 @@ export default async function TracksList({ limit, isRandom }: Props) {
           className="bg-[#181818] p-3 rounded-md hover:bg-[#282828] transition-all cursor-pointer"
         >
           <Image
-            src={"/sem-perfil.png"}
+            src={"/sem-musica.png"}
             alt={"Foto perfil"}
             width={132}
             height={40}
