@@ -1,8 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Search, Plus, ChevronRight } from "lucide-react";
-import { Button } from "@/app/components/ui/button";
-import { fetchBands, fetchTracks } from "./actions/fetchItems";
+import { ChevronRight } from "lucide-react";
 import TracksList from "./components/tracksList";
 import BandsList from "./components/bandsList";
 import Header from "./components/header";

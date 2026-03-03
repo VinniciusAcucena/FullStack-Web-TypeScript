@@ -13,6 +13,11 @@ import {
   CreateTrackFormState,
 } from "../actions/createTracksAction";
 
+interface Band {
+  id: string;
+  name: string;
+}
+
 interface Props {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   onSuccess: () => void;
@@ -28,7 +33,7 @@ export default function Create({
 }: Props) {
   const [isLoading] = useState(false);
   const [state, formAction] = useActionState(createTrackAction, INITIAL_STATE);
-
+  const [bands, setBands] = useState<Band[]>([]);
   useEffect(() => {
     if (state.status === "success") {
       toast.success(
@@ -41,6 +46,23 @@ export default function Create({
       toast.error(state.message ? state.message : "Erro ao adicionar Música");
     }
   }, [state]);
+
+  useEffect(() => {
+    async function fetchBands() {
+      try {
+        const response = await fetch("/api/band");
+        const data = await response.json();
+        const orderedBands = data.bands.sort((a: Band, b: Band) =>
+          a.name.localeCompare(b.name),
+        );
+        setBands(orderedBands);
+      } catch (error) {
+        console.error("Erro ao encontrar as bandas");
+      }
+    }
+
+    fetchBands();
+  }, []);
 
   return (
     <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
@@ -72,12 +94,18 @@ export default function Create({
           </div>
           <div>
             <span className="font-semibold text-sm">Banda:</span>
-            <input
+            <select
               name="bandId"
-              type="text"
-              placeholder="ID da banda"
+              defaultValue=""
               className="w-full p-2 border rounded"
-            />
+            >
+              <option value="">Selecione uma banda</option>
+              {bands.map((band) => (
+                <option key={band.id} value={band.id}>
+                  {band.name}
+                </option>
+              ))}
+            </select>
             {state?.errors?.bandId && (
               <p className="text-red-500 text-sm">
                 {state.errors.bandId.errors.join(",")}
