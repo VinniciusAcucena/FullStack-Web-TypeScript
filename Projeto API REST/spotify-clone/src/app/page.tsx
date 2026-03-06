@@ -9,8 +9,6 @@ import Footer from "./components/footer";
 export default async function SpotifyHomePage() {
   return (
     <div className="flex flex-col h-screen bg-black text-white">
-      <Header />
-
       <div className="flex flex-1 overflow-hidden">
         <main className="flex-1 overflow-y-auto bg-gradient-to-b from-[#121212] to-black p-4">
           <section className="mb-8">
@@ -44,8 +42,6 @@ export default async function SpotifyHomePage() {
           </section>
         </main>
       </div>
-
-      <Footer></Footer>
     </div>
   );
 }

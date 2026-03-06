@@ -18,8 +18,7 @@ export default async function BandPage({ params }: { params: { id: string } }) {
   const band = await findBandById(params.id);
   console.log(band);
   return (
-    <div className="flex flex-col h-screen">
-      <Header></Header>
+    <div className="flex flex-col min-h-screen pb-24">
       <Link
         href="/"
         className="text-sm text-gray-400 hover:text-white flex items-center"
@@ -75,7 +74,6 @@ export default async function BandPage({ params }: { params: { id: string } }) {
           <p>Banda não encontrada</p>
         )}
       </div>
-      <Footer />
     </div>
   );
 }

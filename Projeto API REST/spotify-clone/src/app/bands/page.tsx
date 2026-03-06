@@ -6,8 +6,7 @@ import Footer from "../components/footer";
 
 export default function BandsPage() {
   return (
-    <div>
-      <Header></Header>
+    <div className="flex flex-col min-h-screen pb-20">
       <Link
         href="/"
         className="text-sm text-gray-400 hover:text-white flex items-center"
@@ -19,9 +18,8 @@ export default function BandsPage() {
         <div className="flex flex-row justify-between items-center mb-4">
           <h2 className="text-2xl font-bold">Todas as bandas</h2>
         </div>
-        <BandsList isRandom={false} />*
+        <BandsList isRandom={false} />
       </section>
-      <Footer />
     </div>
   );
 }

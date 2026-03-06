@@ -2,7 +2,7 @@ import { Button } from "./ui/button";
 
 export default function Footer() {
   return (
-    <div className="bg-gradient-to-r from-purple-700 to-blue-500 p-3 flex justify-between items-center ">
+    <div className="fixed bottom-0 left-0 w-full bg-gradient-to-r from-purple-700 to-blue-500 p-3 flex justify-between items-center ">
       <div>
         <p className="text-xs font-bold">Testar o Premium de graça</p>
         <p className="text-xs">

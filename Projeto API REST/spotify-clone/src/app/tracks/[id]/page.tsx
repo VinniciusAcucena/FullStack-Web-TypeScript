@@ -24,7 +24,6 @@ export default async function TrackPage({
   const track = await findTrackById(params.id);
   return (
     <div>
-      <Header />
       <Link
         href="/"
         className="text-sm text-gray-400 hover:text-white flex items-center"
@@ -33,7 +32,7 @@ export default async function TrackPage({
         Voltar
       </Link>
 
-      <div className="flex flex-col justify-center items-center p-4 max-w-2xl mx-auto text-gray-300">
+      <div className="flex flex-col justify-center items-center p-4 max-w-2xl mx-auto text-gray-300 gap-2">
         <Image
           src={"/sem-musica.png"}
           alt={"Foto disco"}
@@ -65,8 +64,6 @@ export default async function TrackPage({
           <SkipForward size={40} />
         </button>
       </div>
-
-      <Footer />
     </div>
   );
 }
