@@ -31,3 +31,12 @@ export async function findBandById(id: string) {
   console.log("RESPOSTA COMPLETA:", JSON.stringify(data, null, 2));
   return data;
 }
+
+export async function findTrackById(id: string) {
+  const response = await fetch(
+    `http://host.docker.internal:3001/api/track/${id}`,
+  );
+  const data = await response.json();
+  console.log("RESPOSTA COMPLETA:", JSON.stringify(data, null, 2));
+  return data;
+}

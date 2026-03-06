@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { fetchTracks } from "../actions/fetchItems";
 import Image from "next/image";
 
@@ -6,6 +7,7 @@ interface Band {
 }
 
 interface Track {
+  id: string;
   title: string;
   durationInSeconds: number;
   bandId: string;
@@ -35,13 +37,15 @@ export default async function TracksList({ limit, isRandom }: Props) {
           key={index}
           className="bg-[#181818] p-3 rounded-md hover:bg-[#282828] transition-all cursor-pointer"
         >
-          <Image
-            src={"/sem-musica.png"}
-            alt={"Foto perfil"}
-            width={132}
-            height={40}
-            className="mr-1"
-          />
+          <Link href={`/tracks/${track.id}`}>
+            <Image
+              src={"/sem-musica.png"}
+              alt={"Foto perfil"}
+              width={132}
+              height={40}
+              className="mr-1"
+            />
+          </Link>
           <h3 className="font-semibold text-sm truncate">{track.title}</h3>
           <p className="text-gray-400 text-xs mt-1 truncate">
             {formatDuration(track.durationInSeconds)}
