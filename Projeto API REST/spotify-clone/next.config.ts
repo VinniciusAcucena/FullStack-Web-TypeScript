@@ -5,6 +5,14 @@ const nextConfig: NextConfig = {
   watchOptions: {
     pollIntervalMs: 1000,
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**.ufs.sh",
+      },
+    ],
+  },
 };
 
 export default nextConfig;

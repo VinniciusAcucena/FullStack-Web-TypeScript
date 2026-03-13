@@ -5,6 +5,7 @@ export const BandSchema = z.object({
   slug: z.string().min(1),
   description: z.string().optional(),
   status: z.enum(["ACTIVE", "INACTIVE"]).default("ACTIVE"),
+  imageUrl: z.string().url().optional(),
 });
 
 const uuidRegex =

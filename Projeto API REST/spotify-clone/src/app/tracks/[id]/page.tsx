@@ -25,7 +25,7 @@ export default async function TrackPage({
   return (
     <div>
       <Link
-        href="/"
+        href="/tracks"
         className="text-sm text-gray-400 hover:text-white flex items-center"
       >
         <ChevronLeft className="w-4 h-4 ml-1" />
@@ -34,10 +34,11 @@ export default async function TrackPage({
 
       <div className="flex flex-col justify-center items-center p-4 max-w-2xl mx-auto text-gray-300 gap-2">
         <Image
-          src={"/sem-musica.png"}
+          src={track.imageUrl ?? "/sem-musica.png"}
           alt={"Foto disco"}
           width={300}
           height={200}
+          className="rounded-xl"
         />
         <h1 className="text-semibold text-4xl ">{track.title}</h1>
         <p className=" text-2xl mt-1">{track.band.name}</p>

@@ -18,12 +18,14 @@
     "@hookform/resolvers": "^5.2.2",
     "@prisma/client": "^6.19.2",
     "@radix-ui/themes": "^3.2.1",
+    "@uploadthing/react": "^7.3.3",
     "next": "^15.5.11",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.71.1",
     "react-hot-toast": "^2.6.0",
     "sass": "^1.97.3",
+    "uploadthing": "^7.7.4",
     "zod": "^4.3.6"
   },
   "devDependencies": {
@@ -39,5 +41,8 @@
     "tailwindcss": "^4",
     "ts-node": "^10.9.2",
     "typescript": "^5"
+  },
+  "overrides": {
+    "effect": "3.19.19"
   }
 }

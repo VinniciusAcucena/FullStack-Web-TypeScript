@@ -56,7 +56,7 @@ export default async function BandPage({ params }: { params: { id: string } }) {
                     >
                       <div className="flex gap-2 items-center">
                         <Image
-                          src={"/sem-musica.png"}
+                          src={track.imageUrl ?? "/sem-musica.png"}
                           alt={"Foto disco"}
                           width={40}
                           height={40}

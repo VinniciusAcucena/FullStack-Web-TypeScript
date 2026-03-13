@@ -1,5 +1,8 @@
+"use client";
+
 import Button from "@/app/components/Button";
 import Loading from "@/app/components/Loading";
+
 import {
   Dispatch,
   SetStateAction,
@@ -12,6 +15,7 @@ import {
   createTrackAction,
   CreateTrackFormState,
 } from "../actions/createTracksAction";
+import { UploadButton } from "../../../../../lib/uploadthing";
 
 interface Band {
   id: string;
@@ -34,6 +38,13 @@ export default function Create({
   const [isLoading] = useState(false);
   const [state, formAction] = useActionState(createTrackAction, INITIAL_STATE);
   const [bands, setBands] = useState<Band[]>([]);
+  const [imageUrl, setImageUrl] = useState<string>("");
+  const [imageuploaded, setImageUploaded] = useState(false);
+  const [audioUrl, setAudioUrl] = useState<string>("");
+  const [audioUploaded, setAudioUploaded] = useState(false);
+
+  console.log("RENDER");
+
   useEffect(() => {
     if (state.status === "success") {
       toast.success(
@@ -127,6 +138,41 @@ export default function Create({
             )}
           </div>
           <div>
+            <span className="font-semibold text-sm">Capa da música:</span>
+            <UploadButton
+              endpoint="trackImage"
+              appearance={{
+                button:
+                  "w-full border-2 border-dashed border-gray-300 rounded-lg p-6 bg-gray-50 text-gray-800 font-semibold hover:bg-gray-100",
+                allowedContent: "text-xs text-gray-800",
+              }}
+              content={{
+                button: "Adicionar capa da musica",
+                allowedContent: "PNG ou JPG",
+              }}
+              onClientUploadComplete={(res) => {
+                console.log("Imagem enviada:", res);
+                setImageUrl(res[0].ufsUrl);
+                toast.success("Capa da música enviada com sucesso");
+              }}
+              onUploadError={(err) => {
+                console.error("Erro ao fazer upload da imagem:", err);
+              }}
+            />
+            {imageUrl && (
+              <div className="flex items-center gap-3">
+                <img
+                  src={imageUrl}
+                  alt="preview"
+                  className="mt-2 w-32 h-32 object-cover rounded"
+                />
+                <p className="text-green-500 text-sm">
+                  Capa da música adicionada com sucesso!
+                </p>
+              </div>
+            )}
+          </div>
+          <div>
             <span className="font-semibold text-sm">Duração em Segundos:</span>
             <input
               name="durationInSeconds"
@@ -134,16 +180,35 @@ export default function Create({
               type="number"
               className="w-full p-2 border rounded"
             />
+            {state?.errors?.durationInSeconds && (
+              <p className="text-red-500 text-sm">
+                {state.errors.durationInSeconds.errors.join(",")}
+              </p>
+            )}
           </div>
-          {state?.errors?.durationInSeconds && (
-            <p className="text-red-500 text-sm">
-              {state.errors.durationInSeconds.errors.join(",")}
-            </p>
-          )}
+          <div>
+            <span className="font-semibold text-sm">Áudio da música:</span>
+            <UploadButton
+              endpoint="trackAudio"
+              onClientUploadComplete={(res) => {
+                console.log("Áudio enviado:", res);
+                setAudioUrl(res[0].ufsUrl);
+                toast.success("Aúdio enviado com sucesso");
+              }}
+            />
+            {audioUrl && (
+              <p className="text-green-500 text-sm">
+                Áudio adicionado com sucesso!
+              </p>
+            )}
+          </div>
+
+          <input type="hidden" name="audioUrl" value={audioUrl} />
+          <input type="hidden" name="imageUrl" value={imageUrl} />
 
           <div className="flex justify-end">
             <Button
-              disabled={isLoading}
+              disabled={isLoading || !audioUrl}
               className="flex w-[120px]justify-center"
             >
               {isLoading ? (

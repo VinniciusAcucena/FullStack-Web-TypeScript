@@ -12,6 +12,7 @@ interface Track {
   durationInSeconds: number;
   bandId: string;
   band: Band;
+  imageUrl: string;
 }
 
 interface Props {
@@ -39,20 +40,20 @@ export default async function TracksList({ limit, isRandom }: Props) {
         >
           <Link href={`/tracks/${track.id}`}>
             <Image
-              src={"/sem-musica.png"}
+              src={track.imageUrl ?? "/sem-musica.png"}
               alt={"Foto perfil"}
               width={132}
-              height={40}
-              className="mr-1"
+              height={132}
+              className=" rounded-xl mx-auto"
             />
+            <h3 className="font-semibold text-sm truncate">{track.title}</h3>
+            <p className="text-gray-400 text-xs mt-1 truncate">
+              {formatDuration(track.durationInSeconds)}
+            </p>
+            <p className="text-gray-400 text-xs mt-1 truncate">
+              {track.band.name}
+            </p>
           </Link>
-          <h3 className="font-semibold text-sm truncate">{track.title}</h3>
-          <p className="text-gray-400 text-xs mt-1 truncate">
-            {formatDuration(track.durationInSeconds)}
-          </p>
-          <p className="text-gray-400 text-xs mt-1 truncate">
-            {track.band.name}
-          </p>
         </div>
       ))}
     </div>

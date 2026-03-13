@@ -5,6 +5,8 @@ export const TrackSchema = z.object({
   slug: z.string().min(1),
   durationInSeconds: z.int().optional(),
   status: z.enum(["ACTIVE", "INACTIVE"]).default("ACTIVE"),
+  imageUrl: z.string().url().optional(),
+  audioUrl: z.string().url().optional(),
   bandId: z.string().uuid().optional(),
 });
 
