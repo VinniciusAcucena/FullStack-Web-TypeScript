@@ -132,6 +132,7 @@ export async function PATCH(request: Request) {
       slug: formData.slug,
       description: formData.description,
       status: formData.status,
+      imageUrl: formData.imageUrl,
     };
 
     const validateData = BandPatchSchema.parse(data);
@@ -143,6 +144,7 @@ export async function PATCH(request: Request) {
         slug: validateData.slug,
         description: validateData.description,
         status: validateData.status,
+        imageUrl: validateData.imageUrl,
       },
     });
     return Response.json({ msg: "Banda atualizada" }, { status: 200 });

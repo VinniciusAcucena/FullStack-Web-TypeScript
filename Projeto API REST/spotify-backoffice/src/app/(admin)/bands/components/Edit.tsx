@@ -4,9 +4,10 @@ import { BandPatchSchema } from "@/app/schemas/band.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import z from "zod";
+import z, { set } from "zod";
 import toast from "react-hot-toast";
 import { Band } from "../../../../../generated/prisma";
+import { UploadButton } from "../../../../../lib/uploadthing";
 
 interface Props {
   band: Band;
@@ -31,9 +32,14 @@ export default function Edit({
       status: "ACTIVE",
     },
   });
+  const [imageUrl, setImageUrl] = useState<string>("");
 
   const onSubmit = async (data: BandFormData) => {
-    const handJSON = JSON.stringify(data);
+    const payload = {
+      ...data,
+      imageUrl,
+    };
+    const handJSON = JSON.stringify(payload);
     try {
       setIsLoading(true);
       const response = await fetch("http://localhost:3001/api/band", {
@@ -73,6 +79,7 @@ export default function Edit({
         description: band.description || undefined,
         status: band.status,
       });
+      setImageUrl(band.imageUrl ?? "");
     }
   }, [band, reset]);
   return (
@@ -129,6 +136,36 @@ export default function Edit({
               <p className="text-red-500 text-sm mt-1">
                 {formState.errors.description.message}
               </p>
+            )}
+          </div>
+          <div>
+            <span className="font-semibold text-sm">Capa da música:</span>
+            <UploadButton
+              endpoint="bandImage"
+              appearance={{
+                button:
+                  "w-full border-2 border-dashed border-gray-300 rounded-lg p-6 h-20 !text-gray-800 bg-gray-50 font-semibold hover:bg-gray-100",
+              }}
+              content={{
+                button: "Alterar capa da banda",
+              }}
+              onClientUploadComplete={(res) => {
+                console.log("Imagem enviada:", res);
+                setImageUrl(res[0].ufsUrl);
+                toast.success("Capa da banda enviada com sucesso");
+              }}
+              onUploadError={(err) => {
+                console.error("Erro ao fazer upload da imagem:", err);
+              }}
+            />
+            {imageUrl && (
+              <div className="flex justify-center mt-2">
+                <img
+                  src={imageUrl ?? "sem-imagem.png"}
+                  alt="preview"
+                  className="mt-2 w-32 h-32 object-cover rounded"
+                />
+              </div>
             )}
           </div>
           <div>

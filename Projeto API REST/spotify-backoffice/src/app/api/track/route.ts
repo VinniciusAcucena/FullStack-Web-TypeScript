@@ -86,6 +86,8 @@ export async function PATCH(request: Request) {
       slug: formData.slug,
       durationInSeconds: formData.durationInSeconds,
       status: formData.status,
+      imageUrl: formData.imageUrl,
+      audioUrl: formData.audioUrl,
     };
 
     const validateData = TrackPatchSchema.parse(data);
@@ -97,6 +99,8 @@ export async function PATCH(request: Request) {
         slug: validateData.slug,
         durationInSeconds: validateData.durationInSeconds,
         status: validateData.status,
+        imageUrl: validateData.imageUrl,
+        audioUrl: validateData.audioUrl,
       },
     });
     return Response.json(

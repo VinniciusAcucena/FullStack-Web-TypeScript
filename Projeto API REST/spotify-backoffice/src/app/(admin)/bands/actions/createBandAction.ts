@@ -19,6 +19,7 @@ export async function createBandAction(
     name: formData.get("name"),
     slug: formData.get("slug"),
     description: formData.get("description") || "",
+    imageUrl: formData.get("imageUrl"),
   };
 
   const validateData = BandSchema.safeParse(data);
@@ -52,6 +53,7 @@ export async function createBandAction(
       slug: validateData.data.slug,
       description: validateData.data.description,
       status: validateData.data.status,
+      imageUrl: validateData.data.imageUrl,
     },
   });
 

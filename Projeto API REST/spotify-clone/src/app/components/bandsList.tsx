@@ -11,6 +11,7 @@ interface Band {
   id: string;
   name: string;
   description: string;
+  imageUrl?: string;
 }
 
 export default async function BandsList({ limit, isRandom }: Props) {
@@ -24,11 +25,11 @@ export default async function BandsList({ limit, isRandom }: Props) {
         >
           <Link href={`/bands/${band.id}`}>
             <Image
-              src={"/sem-perfil.png"}
+              src={band.imageUrl ?? "/sem-perfil.png"}
               alt={"Foto perfil"}
               width={132}
-              height={40}
-              className="mr-1"
+              height={132}
+              className="rounded-xl mx-auto"
             />
             <h3 className="font-semibold text-sm truncate">{band.name}</h3>
             <p className="text-gray-400 text-xs mt-1">

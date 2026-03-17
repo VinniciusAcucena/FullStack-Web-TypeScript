@@ -12,6 +12,7 @@ import {
   createBandAction,
   CreateBandFormState,
 } from "../actions/createBandAction";
+import { UploadButton } from "../../../../../lib/uploadthing";
 
 interface Props {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
@@ -28,6 +29,7 @@ export default function Create({
 }: Props) {
   const [isLoading] = useState(false);
   const [state, formAction] = useActionState(createBandAction, INITIAL_STATE);
+  const [imageUrl, setImageUrl] = useState<string>("");
 
   useEffect(() => {
     if (state.status === "success") {
@@ -90,6 +92,37 @@ export default function Create({
               className="w-full p-2 border rounded"
             />
           </div>
+          <div>
+            <span className="font-semibold text-sm">Imagem da banda:</span>
+            <UploadButton
+              endpoint="bandImage"
+              appearance={{
+                button:
+                  "w-full border-2 border-dashed border-gray-300 rounded-lg p-6 h-20 !text-gray-800 bg-gray-50 font-semibold hover:bg-gray-100",
+              }}
+              content={{
+                button: "Adicionar capa da musica",
+              }}
+              onClientUploadComplete={(res) => {
+                console.log("Imagem enviada:", res);
+                setImageUrl(res[0].ufsUrl);
+                toast.success("Capa da banda enviada com sucesso");
+              }}
+              onUploadError={(err) => {
+                console.error("Erro ao fazer upload da imagem:", err);
+              }}
+            />
+            {imageUrl && (
+              <div className="flex justify-center mt-2">
+                <img
+                  src={imageUrl}
+                  alt="preview"
+                  className="mt-2 w-32 h-32 object-cover rounded"
+                />
+              </div>
+            )}
+          </div>
+          <input type="hidden" name="imageUrl" value={imageUrl} />
 
           <div className="flex justify-end">
             <Button

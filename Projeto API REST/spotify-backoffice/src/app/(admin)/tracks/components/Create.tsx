@@ -15,7 +15,7 @@ import {
   createTrackAction,
   CreateTrackFormState,
 } from "../actions/createTracksAction";
-import { UploadButton } from "../../../../../lib/uploadthing";
+import { UploadButton, UploadDropzone } from "../../../../../lib/uploadthing";
 
 interface Band {
   id: string;
@@ -39,9 +39,7 @@ export default function Create({
   const [state, formAction] = useActionState(createTrackAction, INITIAL_STATE);
   const [bands, setBands] = useState<Band[]>([]);
   const [imageUrl, setImageUrl] = useState<string>("");
-  const [imageuploaded, setImageUploaded] = useState(false);
   const [audioUrl, setAudioUrl] = useState<string>("");
-  const [audioUploaded, setAudioUploaded] = useState(false);
 
   console.log("RENDER");
 
@@ -77,7 +75,7 @@ export default function Create({
 
   return (
     <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
-      <div className="bg-white p-8 rounded shadow-lg w-full max-w-3xl relative">
+      <div className="bg-white p-8 rounded shadow-lg w-full max-w-3xl relative max-h-[90vh] overflow-y-auto">
         <button
           onClick={() => setIsOpen(false)}
           className="absolute top-4 right-8 text-gray-500 hover:text-gray-800 text-4xl font-bold hover:cursor-pointer"
@@ -143,12 +141,10 @@ export default function Create({
               endpoint="trackImage"
               appearance={{
                 button:
-                  "w-full border-2 border-dashed border-gray-300 rounded-lg p-6 bg-gray-50 text-gray-800 font-semibold hover:bg-gray-100",
-                allowedContent: "text-xs text-gray-800",
+                  "w-full border-2 border-dashed border-gray-300 rounded-lg p-6 h-20 !text-gray-800 bg-gray-50 font-semibold hover:bg-gray-100",
               }}
               content={{
                 button: "Adicionar capa da musica",
-                allowedContent: "PNG ou JPG",
               }}
               onClientUploadComplete={(res) => {
                 console.log("Imagem enviada:", res);
@@ -160,15 +156,12 @@ export default function Create({
               }}
             />
             {imageUrl && (
-              <div className="flex items-center gap-3">
+              <div className="flex justify-center mt-2">
                 <img
                   src={imageUrl}
                   alt="preview"
                   className="mt-2 w-32 h-32 object-cover rounded"
                 />
-                <p className="text-green-500 text-sm">
-                  Capa da música adicionada com sucesso!
-                </p>
               </div>
             )}
           </div>
@@ -190,6 +183,15 @@ export default function Create({
             <span className="font-semibold text-sm">Áudio da música:</span>
             <UploadButton
               endpoint="trackAudio"
+              appearance={{
+                button:
+                  "w-full border-2 border-dashed border-gray-300 rounded-lg p-6 h-20 bg-gray-50 !text-gray-800 font-semibold hover:bg-gray-100",
+                allowedContent: "text-xs text-gray-800",
+              }}
+              content={{
+                button: "Adicionar áudio da musica",
+                allowedContent: "MP3 ou WAV",
+              }}
               onClientUploadComplete={(res) => {
                 console.log("Áudio enviado:", res);
                 setAudioUrl(res[0].ufsUrl);

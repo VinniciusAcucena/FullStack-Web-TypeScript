@@ -34,11 +34,11 @@ export default async function BandPage({ params }: { params: { id: string } }) {
                 {band.name}
               </h1>
               <Image
-                src={"/sem-perfil.png"}
+                src={band.imageUrl ?? "/sem-perfil.png"}
                 alt={"Foto perfil"}
                 width={180}
                 height={80}
-                className="mr-1"
+                className="rounded-xl mt-4"
               />
               <p className="text-gray-300 text-2xl mt-1">
                 {band.description}
